@@ -64,10 +64,8 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     private TextField tfUserName;
 
     @FXML
-    private Button btnLogin;
+    private Button btnLogin, btnLogOut;
 
-    @FXML
-    private Button btnLogOut;
 
     @FXML
     private AnchorPane anpEmp;
@@ -81,11 +79,8 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     @FXML
     private TextField tfAgentId, tfAgtFirstName, tfAgtMiddleInitial, tfAgtLastName, tfAgtBusPhone, tfAgtEmail, tfAgtPosition, tfAgencyId;
 
-
     @FXML
     private ImageView imageViewAgentPhoto;
-
-
 
     @FXML
     private TableColumn<String, Agency> colAgncyId1, colAgncyAddress, colAgncyCity,colAgncyProv, colAgncyPostal, colAgncyCountry,
@@ -96,10 +91,7 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
 
 
     @FXML
-    private Label lblID;
-
-    @FXML
-    private Label lbl1;
+    private Label lblID,  lbl1;
 
     @FXML
     private Label lbl2;
@@ -189,51 +181,14 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     private AnchorPane apControls1;
 
     @FXML
-    private TextField tfCustId;
+    private TextField tfCustId, tfCustFirstName, tfCustMiddleInitial, tfCustLastName, tfCustPhone, tfCustEmail, tfCustNotes;
 
     @FXML
-    private TextField tfCustFirstName;
+    private Label lblID1,  lbl11, lbl21,lbl31, lbl41,lbl71,  lbl51, lbl311;
 
-    @FXML
-    private TextField tfCustMiddleInitial;
 
-    @FXML
-    private TextField tfCustLastName;
-
-    @FXML
-    private TextField tfCustPhone;
-
-    @FXML
-    private Label lblID1;
-
-    @FXML
-    private Label lbl11;
-
-    @FXML
-    private Label lbl21;
-
-    @FXML
-    private Label lbl31;
-
-    @FXML
-    private Label lbl41;
-
-    @FXML
-    private Label lbl71;
-
-    @FXML
-    private Label lbl51;
-
-    @FXML
-    private TextField tfCustEmail;
-
-    @FXML
-    private TextField tfCustNotes;
     @FXML
     private AnchorPane anpEmp11;
-
-    @FXML
-    private Label lbl311;
 
     @FXML
     private Button btnUpdatePackage,btnAddPackage, btnClearPackageTF, btnApplyPackageChanges,
@@ -241,31 +196,16 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     btnClearAgent, btnInsertAgent;
 
     @FXML
-    private Label lblID11;
+    private Label lblID11, lbl211, lbl711;
 
     @FXML
-    private Label lbl211;
+    private TextField tfPkgBasePrice, tfAgencyCommission, tfPkgName;
 
     @FXML
-    private Label lbl711;
-
-    @FXML
-    private TextField tfPkgBasePrice;
-
-    @FXML
-    private TextField tfAgencyCommission;
-
-    @FXML
-    private DatePicker dateStartDate;
-
-    @FXML
-    private DatePicker dateEndDate;
+    private DatePicker dateStartDate, dateEndDate;
 
     @FXML
     private ComboBox<?> cbPackageId;
-
-    @FXML
-    private TextField tfPkgName;
 
     @FXML
     private TextArea taPkgDesc;
@@ -319,58 +259,17 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     private Button btnInsert3;
 
     @FXML
-    private Button btnClear3;
+    private Button btnClear3, btnApply3;
 
     @FXML
     private DatePicker datepicker13;
 
     @FXML
-    private Label lblID3;
+    private Label lblID3,  lbl13, lbl23, lbl33, lbl43, lbl73, lbl53,  lbl6, lbl63, lbl83, lbl93;
 
     @FXML
-    private Button btnApply3;
+    private TextField tf63, tf73, tf83, tf93;
 
-    @FXML
-    private Label lbl13;
-
-    @FXML
-    private Label lbl23;
-
-    @FXML
-    private Label lbl33;
-
-    @FXML
-    private Label lbl43;
-
-    @FXML
-    private Label lbl73;
-
-    @FXML
-    private Label lbl53;
-
-    @FXML
-    private Label lbl6;
-
-    @FXML
-    private Label lbl63;
-
-    @FXML
-    private Label lbl83;
-
-    @FXML
-    private TextField tf63;
-
-    @FXML
-    private TextField tf73;
-
-    @FXML
-    private TextField tf83;
-
-    @FXML
-    private TextField tf93;
-
-    @FXML
-    private Label lbl93;
 
     @FXML
     private DatePicker datepicker23;
@@ -399,15 +298,12 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     @FXML
     void onActionBtnExit(ActionEvent event) {
         Platform.exit();
-
     }
 
     @FXML
     void onActionBtnLoginClick(ActionEvent event) {
-
         //if login was successful, then set this after login was ran
         DisableLoginEnableLogout();
-
     }
 
     @FXML
@@ -429,7 +325,6 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
         DeleteSelectedAgent();
         ClearAgentInputData();
         refreshAgentTableView();
-
        Alert a = new Alert(Alert.AlertType.INFORMATION, "You're fired!");
        a.show();
     }
@@ -437,7 +332,6 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     @FXML
     void onInsertAgentBtnClick(MouseEvent event) {
         InsertAgent();
-
     }
 
 
@@ -451,9 +345,6 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
       tfAgtMiddleInitial.setText("");
       tfAgencyId.setText("");
     }
-
-
-
 
     @FXML
     void initialize() {
