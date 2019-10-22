@@ -611,6 +611,8 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
                         tfAgtEmail.setText(_selectedAgent.getAgtEmail());
                         tfAgtPosition.setText(_selectedAgent.getAgtPosition());
                         tfAgencyId.setText(String.valueOf(_selectedAgent.getAgencyId()));
+                       int sendThisIndex = Integer.valueOf(_selectedAgent.getAgencyId());
+                        LoadAgency(sendThisIndex);
                     }
                 }
         );
@@ -725,6 +727,43 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
         RefreshAgencyTableView();
     }
 
+    public void LoadAgency(int X){
+        _agencyDb = new AgencyDB(new data.dummy.AgencyData());
+        agencies = FXCollections.observableArrayList( _agencyDb.getAgency(X));
+        colAgencyId1 = new TableColumn<>("Id");
+        colAgencyId1.setCellValueFactory(new PropertyValueFactory<>("AgencyId"));
+
+        colAgncyAddress = new TableColumn<>("Address");
+        colAgncyAddress.setCellValueFactory(new PropertyValueFactory<>("AgncyAddress"));
+
+        colAgncyCity= new TableColumn<>("City");
+        colAgncyCity.setCellValueFactory(new PropertyValueFactory<>("AgncyCity"));
+
+        colAgncyProv = new TableColumn<>("Province");
+        colAgncyProv.setCellValueFactory(new PropertyValueFactory<>("AgncyProv"));
+
+        colAgncyPostal = new TableColumn<>("Postal Code");
+        colAgncyPostal.setCellValueFactory(new PropertyValueFactory<>("AgncyPostal"));
+
+        colAgncyCountry = new TableColumn<>("Country");
+        colAgncyCountry.setCellValueFactory(new PropertyValueFactory<>("AgncyCountry"));
+
+        colAgncyPhone = new TableColumn<>("Phone");
+        colAgncyPhone.setCellValueFactory(new PropertyValueFactory<>("AgncyPhone"));
+
+        colAgncyFax= new TableColumn<>("Fax");
+        colAgncyFax.setCellValueFactory(new PropertyValueFactory<>("AgncyFax"));
+
+        tblAgencies.getColumns().add(colAgencyId1);
+        tblAgencies.getColumns().add(colAgncyAddress);
+        tblAgencies.getColumns().add(colAgncyCity);
+        tblAgencies.getColumns().add(colAgncyProv);
+        tblAgencies.getColumns().add(colAgncyPostal);
+        tblAgencies.getColumns().add(colAgncyCountry);
+        tblAgencies.getColumns().add(colAgncyPhone);
+        tblAgencies.getColumns().add(colAgncyFax);
+    }
+
 
     private void refreshAgentTableView() {
         tblAgents.getItems().clear();
@@ -776,6 +815,8 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
         refreshAgentTableView();
         System.out.println("Agent# " + agentId + " was deleted." + message);
     }
+
+
 
     public void InsertAgent(){
         try {
