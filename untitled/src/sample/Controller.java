@@ -1,9 +1,11 @@
 package sample;
 
+import java.lang.annotation.Target;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import data.AgentDB;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
@@ -142,18 +144,6 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     private TextField tf8;
 
     @FXML
-    private Button btnUpdate;
-
-    @FXML
-    private Button btnInsert;
-
-    @FXML
-    private Button btnClear;
-
-    @FXML
-    private Button btnApply;
-
-    @FXML
     private AnchorPane anpEmp1;
 
     @FXML
@@ -254,16 +244,6 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
 
     @FXML
     private TextField tfCustNotes;
-
-    @FXML
-    private Button btnUpdateCustomer;
-
-    @FXML
-    private Button btnInsertCustomer;
-
-    @FXML
-    private Button btnSaveCustomer;
-
     @FXML
     private AnchorPane anpEmp11;
 
@@ -271,19 +251,9 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     private Label lbl311;
 
     @FXML
-    private Button btnUpdatePackage;
-
-    @FXML
-    private Button btnAddPackage;
-
-    @FXML
-    private Button btnClearPackageTF;
-
-    @FXML
-    private Button btnApplyPackageChanges;
-
-    @FXML
-    private Button btnDeletePkg;
+    private Button btnUpdatePackage,btnAddPackage, btnClearPackageTF, btnApplyPackageChanges,
+    btnDeletePkg, btnExit, btnInsertCustomer,  btnSaveCustomer, btnUpdateCustomer, btnUpdate,
+    btnClearAgent, btnInsertAgent;
 
     @FXML
     private Label lblID11;
@@ -361,9 +331,6 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     private TextField tf53;
 
     @FXML
-    private Button btnUpdate3;
-
-    @FXML
     private Button btnInsert3;
 
     @FXML
@@ -423,10 +390,6 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     @FXML
     private DatePicker datepicker23;
 
-    @FXML
-    private Button btnExit;
-
-
     Agent _selectedAgent;
     int _selectedAgentIndex;
 
@@ -463,6 +426,37 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     void onUpdateAgentBtnClick(MouseEvent event) {
         UpdateAgent();
         refreshAgentTableView();
+    }
+    @FXML
+    void onClearAgentBtnClick(MouseEvent event) {
+        ClearAgentInputData();
+    }
+
+    public void onDeleteAgentBtnClick(MouseEvent mouseEvent) {
+        DeleteSelectedAgent();
+        ClearAgentInputData();
+        refreshAgentTableView();
+
+       Alert a = new Alert(Alert.AlertType.INFORMATION, "You're fired!");
+       a.show();
+    }
+
+    @FXML
+    void onInsertAgentBtnClick(MouseEvent event) {
+        InsertAgent();
+
+    }
+
+
+  public void ClearAgentInputData(){
+      tfAgentId.setText("");
+      tfAgtPosition.setText("");
+      tfAgtEmail.setText("");
+      tfAgtBusPhone.setText("");
+      tfAgtLastName.setText("");
+      tfAgtFirstName.setText("");
+      tfAgtMiddleInitial.setText("");
+      tfAgencyId.setText("");
     }
 
 
@@ -508,9 +502,7 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         assert tf7 != null : "fx:id=\"tf7\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert tf8 != null : "fx:id=\"tf8\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert btnUpdate != null : "fx:id=\"btnUpdate\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnInsert != null : "fx:id=\"btnInsert\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnClear != null : "fx:id=\"btnClear\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnApply != null : "fx:id=\"btnApply\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+        assert btnInsertAgent != null : "fx:id=\"btnInsert\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert tabCustomers != null : "fx:id=\"tabCustomers\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert anpEmp1 != null : "fx:id=\"anpEmp1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert tblBookings != null : "fx:id=\"tblBookings\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
@@ -583,7 +575,6 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         assert tf33 != null : "fx:id=\"tf33\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert tf43 != null : "fx:id=\"tf43\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert tf53 != null : "fx:id=\"tf53\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnUpdate3 != null : "fx:id=\"btnUpdate3\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert btnInsert3 != null : "fx:id=\"btnInsert3\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert btnClear3 != null : "fx:id=\"btnClear3\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert datepicker13 != null : "fx:id=\"datepicker13\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
@@ -607,8 +598,6 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         assert tabReview != null : "fx:id=\"tabReview\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert tabFuture != null : "fx:id=\"tabFuture\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert btnExit != null : "fx:id=\"btnExit\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-
-
 
         loadAgents();
 
@@ -678,8 +667,6 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     }
 
     public void loadAgents() {
-        //tblAgents.refresh();
-
 
         _agentDb = new AgentDB(new data.dummy.AgentData());
         agents = FXCollections.observableArrayList( _agentDb.getAgentList());
@@ -717,7 +704,6 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         tblAgents.getColumns().add(colAgtPosition);
         tblAgents.getColumns().add(colAgencyId);
 
-
         refreshAgentTableView();
     }
 
@@ -750,14 +736,43 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
                 String message = _agentDb.updateAgent(_selectedAgent, newAgent);
                 refreshAgentTableView();
                 System.out.println("Update:" + message);
-
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+    public void DeleteSelectedAgent(){
+        int agentId = Integer.parseInt(tfAgentId.getText());
+        String message = _agentDb.deleteAgent(agentId);
+        refreshAgentTableView();
+        System.out.println("Agent# " + agentId + " was deleted." + message);
+    }
+
+    public void InsertAgent(){
+        try {
+            // VALIDATE !!!
+            if(true) {
+                int agentId = 999;
+        Integer newAgencyId = Integer.parseInt(tfAgencyId.getText());
+        String newagtFirstName = tfAgtFirstName.getText();
+        String newagtMiddleInitial = tfAgtMiddleInitial.getText();
+        String newagtLastName = tfAgtLastName.getText();
+        String newagtBusPhone = tfAgtBusPhone.getText();
+        String newagtEmail = tfAgtEmail.getText();
+        String newagtPosition = tfAgtPosition.getText();
+
+        Agent newAgent = new Agent(agentId, newagtFirstName, newagtMiddleInitial, newagtLastName, newagtBusPhone, newagtEmail, newagtPosition, newAgencyId );
+        _agentDb = new AgentDB(new data.dummy.AgentData());
+        String message = _agentDb.insertAgent(newAgent);
+        refreshAgentTableView();
+        System.out.println("Added new fresh meat#: " + message);
+        ClearAgentInputData();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
+
 
 }

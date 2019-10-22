@@ -104,10 +104,10 @@
                                           <TextField fx:id="tfAgtEmail" layoutX="14.0" layoutY="375.0" />
                                           <TextField fx:id="tfAgtPosition" layoutX="14.0" layoutY="430.0" />
                                           <TextField fx:id="tfAgencyId" layoutX="88.0" layoutY="100.0" prefHeight="25.0" prefWidth="26.0" />
-                                          <Button fx:id="btnUpdate" layoutX="10.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#onUpdateAgentBtnClick" prefHeight="29.0" prefWidth="94.0" text="Update Agent" wrapText="true" />
-                                          <Button fx:id="btnInsert" layoutX="11.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="New Agent" />
-                                          <Button fx:id="btnClear" layoutX="16.0" layoutY="477.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="54.0" text="Clear" />
-                                          <Button fx:id="btnApply" layoutX="104.0" layoutY="479.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="55.0" text="Apply" />
+                                          <Button fx:id="btnUpdate" layoutX="88.0" layoutY="477.0" mnemonicParsing="false" onMouseClicked="#onUpdateAgentBtnClick" prefHeight="29.0" prefWidth="94.0" text="Update Agent" wrapText="true" />
+                                          <Button fx:id="btnInsertAgent" layoutX="12.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#onInsertAgentBtnClick" prefHeight="25.0" prefWidth="90.0" text="Add Agent" />
+                                          <Button fx:id="btnClearAgent" layoutX="16.0" layoutY="477.0" mnemonicParsing="false" onMouseClicked="#onClearAgentBtnClick" prefHeight="29.0" prefWidth="54.0" text="Clear" />
+                                          <Button fx:id="btnDeleteAgent" layoutX="112.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#onDeleteAgentBtnClick" prefHeight="29.0" prefWidth="94.0" text="Delete Agent" wrapText="true" />
                                        </children>
                                     </AnchorPane>
                                  </children>
