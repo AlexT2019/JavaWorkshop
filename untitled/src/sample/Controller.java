@@ -613,6 +613,7 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
                         tfAgencyId.setText(String.valueOf(_selectedAgent.getAgencyId()));
                        int sendThisIndex = Integer.valueOf(_selectedAgent.getAgencyId());
                         LoadAgency(sendThisIndex);
+                        RefreshAgencyTableView();
                     }
                 }
         );
@@ -762,6 +763,7 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
         tblAgencies.getColumns().add(colAgncyCountry);
         tblAgencies.getColumns().add(colAgncyPhone);
         tblAgencies.getColumns().add(colAgncyFax);
+        RefreshAgencyTableView();
     }
 
 
