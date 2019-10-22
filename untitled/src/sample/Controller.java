@@ -592,6 +592,7 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
         assert btnExit != null : "fx:id=\"btnExit\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
 
         loadAgents();
+        LoadAgencies();
 
         tblAgents.setOnMouseClicked((MouseEvent event) -> {
                     if (event.getButton().equals(MouseButton.PRIMARY)) {
@@ -671,7 +672,7 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
         colAgtPosition.setCellValueFactory(new PropertyValueFactory<>("agtPosition"));
 
         colAgencyId= new TableColumn<>("Agency Id");
-        colAgencyId.setCellValueFactory(new PropertyValueFactory<>("agtPosition"));
+        colAgencyId.setCellValueFactory(new PropertyValueFactory<>("agencyId"));
 
         tblAgents.getColumns().add(colAgentId);
         tblAgents.getColumns().add(colAgtFirstName);
@@ -719,8 +720,9 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
         tblAgencies.getColumns().add(colAgncyProv);
         tblAgencies.getColumns().add(colAgncyPostal);
         tblAgencies.getColumns().add(colAgncyCountry);
-        tblAgencies.getColumns().add( colAgncyPhone);
+        tblAgencies.getColumns().add(colAgncyPhone);
         tblAgencies.getColumns().add(colAgncyFax);
+        RefreshAgencyTableView();
     }
 
 
@@ -732,7 +734,13 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
         }
     }
 
+    private void RefreshAgencyTableView() {
+        tblAgencies.getItems().clear();
 
+        for (Agency ay: agencies) {
+            tblAgencies.getItems().add(ay);
+        }
+    }
 
 
     public void UpdateAgent(){
