@@ -678,7 +678,8 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     }
 
     public void loadAgents() {
-        tblAgents.refresh();
+        //tblAgents.refresh();
+
 
         _agentDb = new AgentDB(new data.dummy.AgentData());
         agents = FXCollections.observableArrayList( _agentDb.getAgentList());
@@ -707,7 +708,6 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         colAgencyId= new TableColumn<>("Agency Id");
         colAgencyId.setCellValueFactory(new PropertyValueFactory<>("agtPosition"));
 
-
         tblAgents.getColumns().add(colAgentId);
         tblAgents.getColumns().add(colAgtFirstName);
         tblAgents.getColumns().add(colAgtMiddleInitial);
@@ -722,7 +722,7 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     }
 
     private void refreshAgentTableView() {
-        tblAgents.getItems().removeAll();
+        tblAgents.getItems().clear();
 
         for (Agent a: agents ) {
             tblAgents.getItems().add(a);
@@ -734,6 +734,7 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
 
             // VALIDATE !!!
             if(true) {
+
                 int agentId = Integer.parseInt(tfAgentId.getText());
                 Integer newAgencyId = Integer.parseInt(tfAgencyId.getText());
                 String newagtFirstName = tfAgtFirstName.getText();
@@ -747,9 +748,8 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
 
                 _agentDb = new AgentDB(new data.dummy.AgentData());
                 String message = _agentDb.updateAgent(_selectedAgent, newAgent);
+                refreshAgentTableView();
                 System.out.println("Update:" + message);
-
-
 
             }
 
@@ -757,13 +757,7 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
             e.printStackTrace();
         }
 
-//        updateAgent(Agent oldAgent, Agent newAgent)
-
-
 
     }
-
-
-
 
 }
