@@ -805,8 +805,8 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
             // VALIDATE !!!
             if(true) {
 
-                int agentId = Integer.parseInt(tfAgentId.getText());
-                Integer newAgencyId = Integer.parseInt(tfAgencyId.getText());
+                int agentId = Integer.parseInt(tfAgentId.getText().trim());
+                Integer newAgencyId = Integer.parseInt(tfAgencyId.getText().trim());
                 String newagtFirstName = tfAgtFirstName.getText().trim();
                 String newagtMiddleInitial = tfAgtMiddleInitial.getText().trim();
                 String newagtLastName = tfAgtLastName.getText().trim();
@@ -840,13 +840,13 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
             // VALIDATE !!!
             if(true) {
                 int agentId = 999;
-        Integer newAgencyId = Integer.parseInt(tfAgencyId.getText());
-        String newagtFirstName = tfAgtFirstName.getText();
-        String newagtMiddleInitial = tfAgtMiddleInitial.getText();
-        String newagtLastName = tfAgtLastName.getText();
-        String newagtBusPhone = tfAgtBusPhone.getText();
-        String newagtEmail = tfAgtEmail.getText();
-        String newagtPosition = tfAgtPosition.getText();
+        Integer newAgencyId = Integer.parseInt(tfAgencyId.getText().trim());
+        String newagtFirstName = tfAgtFirstName.getText().trim();
+        String newagtMiddleInitial = tfAgtMiddleInitial.getText().trim();
+        String newagtLastName = tfAgtLastName.getText().trim();
+        String newagtBusPhone = tfAgtBusPhone.getText().trim();
+        String newagtEmail = tfAgtEmail.getText().trim();
+        String newagtPosition = tfAgtPosition.getText().trim();
 
         Agent newAgent = new Agent(agentId, newagtFirstName, newagtMiddleInitial, newagtLastName, newagtBusPhone, newagtEmail, newagtPosition, newAgencyId );
         _agentDb = new AgentDB(new data.dummy.AgentData());
