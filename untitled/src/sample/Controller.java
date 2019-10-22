@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Agent;
@@ -597,25 +598,44 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         assert tabFuture != null : "fx:id=\"tabFuture\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert btnExit != null : "fx:id=\"btnExit\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
 
-    //    AgentDB agentDb = new AgentDB(new data.dummy.AgentData());
-     //   agents = FXCollections.observableArrayList( agentDb.getAgentList());
-     //   tblAgents.setItems(agents);
+    
 
-loadAgents();
+        loadAgents();
 
+        tblAgents.setOnMouseClicked((MouseEvent event) -> {
+                    if (event.getButton().equals(MouseButton.PRIMARY)) {
+                        int index = tblAgents.getSelectionModel().getSelectedIndex();
+                        _selectedAgent = (Agent) tblAgents.getItems().get(index);
+                        _selectedAgentIndex = index;
+
+                        System.out.println("Selected Agent" + _selectedAgent.toString());
+                        System.out.println("Selected AgentIndex" + _selectedAgentIndex);
+
+                        tfAgentId.setText(String.valueOf(_selectedAgent.getAgentId()));
+                        tfAgtFirstName.setText(_selectedAgent.getAgtFirstName());
+                        tfAgtMiddleInitial.setText(_selectedAgent.getAgtMiddleInitial());
+                        tfAgtLastName.setText(_selectedAgent.getAgtLastName());
+                        tfAgtBusPhone.setText(_selectedAgent.getAgtBusPhone());
+                        tfAgtEmail.setText(_selectedAgent.getAgtEmail());
+                        tfAgtPosition.setText(_selectedAgent.getAgtPosition());
+                        tfAgencyId.setText(String.valueOf(_selectedAgent.getAgencyId()));
+                    }
+                }
+        );
+/*
         tblAgents.selectionModelProperty().addListener((Observable observable) -> {
-                    int index = tblAgents.getSelectionModel().getSelectedIndex();
+                   // int index = tblAgents.getSelectionModel().getSelectedIndex();
                     _selectedAgent = (Agent) tblAgents.getItems().get(index);
                     _selectedAgentIndex = index;
 
+                    System.out.println("Selected Agent" + _selectedAgent.toString());
+                    System.out.println("Selected AgentIndex" + _selectedAgentIndex);
 
             tfAgentId.setText(String.valueOf(_selectedAgent.getAgentId()));
             tfAgtFirstName.setText(_selectedAgent.getAgtFirstName());
-                    //setCellValueFactory(new PropertyValueFactory<>("agentId"));
 
-//
                 }
-        );
+        ); */
 
     }
 
