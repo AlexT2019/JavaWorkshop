@@ -430,6 +430,11 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     Agent _selectedAgent;
     int _selectedAgentIndex;
 
+    AgentDB _agentDb;
+    private void initRestService() {
+        _agentDb = new AgentDB(new data.dummy.AgentData());
+    }
+
     @FXML
     void OnMouseEnteredLoginBtn(MouseEvent event) {
 
@@ -454,6 +459,11 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         EnableLoginDisableLogout();
     }
 
+    @FXML
+    void onUpdateAgentBtnClick(MouseEvent event) {
+        UpdateAgent();
+        refreshAgentTableView();
+    }
 
 
 
@@ -598,7 +608,7 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         assert tabFuture != null : "fx:id=\"tabFuture\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert btnExit != null : "fx:id=\"btnExit\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
 
-    
+
 
         loadAgents();
 
@@ -659,19 +669,19 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         btnLogin.setDisable(true);
         btnLogOut.setDisable(false);
 
-tabAgents.setDisable(false);
-tabCustomers.setDisable(false);
-tabEmployees.setDisable(false);
-tabFuture.setDisable(false);
-tabPackages.setDisable(false);
-tabReview.setDisable(false);
+        tabAgents.setDisable(false);
+        tabCustomers.setDisable(false);
+        tabEmployees.setDisable(false);
+        tabFuture.setDisable(false);
+        tabPackages.setDisable(false);
+        tabReview.setDisable(false);
     }
 
     public void loadAgents() {
-
         tblAgents.refresh();
-        AgentDB agentDb = new AgentDB(new data.dummy.AgentData());
-        agents = FXCollections.observableArrayList( agentDb.getAgentList());
+
+        _agentDb = new AgentDB(new data.dummy.AgentData());
+        agents = FXCollections.observableArrayList( _agentDb.getAgentList());
 
         colAgentId = new TableColumn<>("Id");
         colAgentId.setCellValueFactory(new PropertyValueFactory<>("agentId"));
@@ -708,9 +718,47 @@ tabReview.setDisable(false);
         tblAgents.getColumns().add(colAgencyId);
 
 
+        refreshAgentTableView();
+    }
+
+    private void refreshAgentTableView() {
+        tblAgents.getItems().removeAll();
+
         for (Agent a: agents ) {
             tblAgents.getItems().add(a);
         }
+    }
+
+    public void UpdateAgent(){
+        try {
+
+            // VALIDATE !!!
+            if(true) {
+                int agentId = Integer.parseInt(tfAgentId.getText());
+                Integer newAgencyId = Integer.parseInt(tfAgencyId.getText());
+                String newagtFirstName = tfAgtFirstName.getText();
+                String newagtMiddleInitial = tfAgtMiddleInitial.getText();
+                String newagtLastName = tfAgtLastName.getText();
+                String newagtBusPhone = tfAgtBusPhone.getText();
+                String newagtEmail = tfAgtEmail.getText();
+                String newagtPosition = tfAgtPosition.getText();
+
+                Agent newAgent = new Agent(agentId, newagtFirstName, newagtMiddleInitial, newagtLastName, newagtBusPhone, newagtEmail, newagtPosition, newAgencyId );
+
+                _agentDb = new AgentDB(new data.dummy.AgentData());
+                String message = _agentDb.updateAgent(_selectedAgent, newAgent);
+                System.out.println("Update:" + message);
+
+
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        updateAgent(Agent oldAgent, Agent newAgent)
+
 
 
     }

@@ -104,7 +104,7 @@
                                           <TextField fx:id="tfAgtEmail" layoutX="14.0" layoutY="375.0" />
                                           <TextField fx:id="tfAgtPosition" layoutX="14.0" layoutY="430.0" />
                                           <TextField fx:id="tfAgencyId" layoutX="88.0" layoutY="100.0" prefHeight="25.0" prefWidth="26.0" />
-                                          <Button fx:id="btnUpdate" layoutX="10.0" layoutY="50.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="94.0" text="Update Agent" wrapText="true" />
+                                          <Button fx:id="btnUpdate" layoutX="10.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#onUpdateAgentBtnClick" prefHeight="29.0" prefWidth="94.0" text="Update Agent" wrapText="true" />
                                           <Button fx:id="btnInsert" layoutX="11.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="90.0" text="New Agent" />
                                           <Button fx:id="btnClear" layoutX="16.0" layoutY="477.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="54.0" text="Clear" />
                                           <Button fx:id="btnApply" layoutX="104.0" layoutY="479.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="55.0" text="Apply" />
@@ -116,66 +116,7 @@
                         </Tab>
                         <Tab fx:id="tabCustomers" text="Customers">
                            <content>
-                              <AnchorPane fx:id="anpEmp1" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="1259.0">
-                                 <children>
-                                    <TableView fx:id="tblBookings" layoutX="263.0" layoutY="41.0" prefHeight="339.0" prefWidth="977.0">
-                                       <columns>
-                                          <TableColumn fx:id="colAgentId1" editable="false" prefWidth="40.0" text="ID" />
-                                          <TableColumn fx:id="colAgtFirstName1" prefWidth="178.0" text="First Name" />
-                                          <TableColumn fx:id="colAgtMiddleInitial1" minWidth="0.0" prefWidth="89.0" text="Middle Initial" />
-                                          <TableColumn fx:id="colAgtLastName1" prefWidth="149.0" text="Last Name" />
-                                          <TableColumn fx:id="colAgtBusPhone1" prefWidth="113.0" text="Phone" />
-                                          <TableColumn fx:id="colAgtEmail1" prefWidth="199.0" text="Email" />
-                                          <TableColumn fx:id="colAgtPosition1" prefWidth="134.0" text="Position" />
-                                       </columns>
-                                    </TableView>
-                                    <Label layoutX="263.0" layoutY="14.0" text="Customers">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <ImageView fx:id="imageViewAgentPhoto1" fitHeight="204.0" fitWidth="200.0" layoutX="466.0" layoutY="454.0" pickOnBounds="true" preserveRatio="true" />
-                                    <TableView fx:id="tblAgencies1" layoutX="262.0" layoutY="437.0" prefHeight="117.0" prefWidth="980.0">
-                                       <columns>
-                                          <TableColumn fx:id="colAgencyId1" editable="false" prefWidth="43.0" text="ID" />
-                                          <TableColumn fx:id="colAgncyAddress1" minWidth="0.0" prefWidth="183.0" text="Address" />
-                                          <TableColumn fx:id="colAgncyCity1" prefWidth="134.0" text="City" />
-                                          <TableColumn fx:id="colAgncyProv1" prefWidth="55.0" text="Province" />
-                                          <TableColumn fx:id="colAgncyPostal1" prefWidth="89.0" text="Postal" />
-                                          <TableColumn fx:id="colAgncyCountry1" prefWidth="69.0" text="Country" />
-                                          <TableColumn fx:id="colAgncyPhone1" prefWidth="169.0" text="Phone" />
-                                          <TableColumn fx:id="colAgncyFax1" prefWidth="122.0" text="Fax" />
-                                       </columns>
-                                    </TableView>
-                                    <AnchorPane fx:id="apControls1" layoutX="14.0" layoutY="14.0" prefHeight="533.0" prefWidth="203.0">
-                                       <children>
-                                          <TextField fx:id="tfCustId" editable="false" layoutX="22.0" layoutY="100.0" prefHeight="25.0" prefWidth="35.0" />
-                                          <TextField fx:id="tfCustFirstName" layoutX="14.0" layoutY="152.0" />
-                                          <TextField fx:id="tfCustMiddleInitial" layoutX="14.0" layoutY="200.0" />
-                                          <TextField fx:id="tfCustLastName" layoutX="14.0" layoutY="252.0" />
-                                          <TextField fx:id="tfCustPhone" layoutX="14.0" layoutY="317.0" />
-                                          <Label fx:id="lblID1" layoutX="22.0" layoutY="79.0" text="ID:" />
-                                          <Label fx:id="lbl11" layoutX="16.0" layoutY="129.0" text="First Name" />
-                                          <Label fx:id="lbl21" layoutX="16.0" layoutY="180.0" text="Middle Name" />
-                                          <Label fx:id="lbl31" layoutX="17.0" layoutY="234.0" text="Last Name" />
-                                          <Label fx:id="lbl41" layoutX="14.0" layoutY="348.0" text="Email" />
-                                          <Label fx:id="lbl71" layoutX="16.0" layoutY="294.0" text="Phone" />
-                                          <Label fx:id="lbl51" layoutX="14.0" layoutY="410.0" text="Notes" />
-                                          <TextField fx:id="tfCustEmail" layoutX="14.0" layoutY="375.0" />
-                                          <TextField fx:id="tfCustNotes" layoutX="14.0" layoutY="430.0" />
-                                          <Button fx:id="btnUpdateCustomer" layoutX="10.0" layoutY="50.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="117.0" text="Update Customer" wrapText="true" />
-                                          <Button fx:id="btnInsertCustomer" layoutX="11.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="New Customer" />
-                                          <Button fx:id="btnClear" layoutX="16.0" layoutY="477.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="54.0" text="Clear" />
-                                          <Button fx:id="btnSaveCustomer" layoutX="104.0" layoutY="479.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="55.0" text="Apply" />
-                                       </children>
-                                    </AnchorPane>
-                                    <Label layoutX="263.0" layoutY="397.0" text="Bookings">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
+                              <AnchorPane fx:id="anpEmp1" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="1259.0" />
                            </content>
                         </Tab>
                         <Tab fx:id="tabPackages" text="Packages">
