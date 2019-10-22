@@ -380,6 +380,7 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
 
     int _selectedAgentIndex;
     int _selectedAgencyIndex;
+    int sendThisIndex = 1;
 
     AgentDB _agentDb;
     AgencyDB _agencyDb;
@@ -611,10 +612,19 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
                         tfAgtEmail.setText(_selectedAgent.getAgtEmail());
                         tfAgtPosition.setText(_selectedAgent.getAgtPosition());
                         tfAgencyId.setText(String.valueOf(_selectedAgent.getAgencyId()));
-                       int sendThisIndex = Integer.valueOf(_selectedAgent.getAgencyId());
-                        LoadAgency(sendThisIndex);
-                        RefreshAgencyTableView();
+                        sendThisIndex = Integer.valueOf(_selectedAgent.getAgencyId());
+                      //  LoadAgency(sendThisIndex);
+                        RefreshAgencyTableViewSingle(sendThisIndex);
                     }
+                }
+        );
+
+        tblAgencies.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getButton().equals(MouseButton.PRIMARY)) {
+           sendThisIndex =  Integer.valueOf(_selectedAgent.getAgencyId());
+//input code to show only the agents who are in that agency
+
+            }
                 }
         );
 
@@ -687,6 +697,8 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
         tblAgents.getColumns().add(colAgencyId);
 
         refreshAgentTableView();
+            RefreshAgencyTableView();
+        //RefreshAgencyTableViewSingle(sendThisIndex);
     }
 
     public void LoadAgencies(){
@@ -728,43 +740,43 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
         RefreshAgencyTableView();
     }
 
-    public void LoadAgency(int X){
-        _agencyDb = new AgencyDB(new data.dummy.AgencyData());
-        agencies = FXCollections.observableArrayList( _agencyDb.getAgency(X));
-        colAgencyId1 = new TableColumn<>("Id");
-        colAgencyId1.setCellValueFactory(new PropertyValueFactory<>("AgencyId"));
-
-        colAgncyAddress = new TableColumn<>("Address");
-        colAgncyAddress.setCellValueFactory(new PropertyValueFactory<>("AgncyAddress"));
-
-        colAgncyCity= new TableColumn<>("City");
-        colAgncyCity.setCellValueFactory(new PropertyValueFactory<>("AgncyCity"));
-
-        colAgncyProv = new TableColumn<>("Province");
-        colAgncyProv.setCellValueFactory(new PropertyValueFactory<>("AgncyProv"));
-
-        colAgncyPostal = new TableColumn<>("Postal Code");
-        colAgncyPostal.setCellValueFactory(new PropertyValueFactory<>("AgncyPostal"));
-
-        colAgncyCountry = new TableColumn<>("Country");
-        colAgncyCountry.setCellValueFactory(new PropertyValueFactory<>("AgncyCountry"));
-
-        colAgncyPhone = new TableColumn<>("Phone");
-        colAgncyPhone.setCellValueFactory(new PropertyValueFactory<>("AgncyPhone"));
-
-        colAgncyFax= new TableColumn<>("Fax");
-        colAgncyFax.setCellValueFactory(new PropertyValueFactory<>("AgncyFax"));
-
-        tblAgencies.getColumns().add(colAgencyId1);
-        tblAgencies.getColumns().add(colAgncyAddress);
-        tblAgencies.getColumns().add(colAgncyCity);
-        tblAgencies.getColumns().add(colAgncyProv);
-        tblAgencies.getColumns().add(colAgncyPostal);
-        tblAgencies.getColumns().add(colAgncyCountry);
-        tblAgencies.getColumns().add(colAgncyPhone);
-        tblAgencies.getColumns().add(colAgncyFax);
-        RefreshAgencyTableView();
-    }
+//    public void LoadAgency(int X){
+//        _agencyDb = new AgencyDB(new data.dummy.AgencyData());
+//        agencies = FXCollections.observableArrayList( _agencyDb.getAgency(X));
+//        colAgencyId1 = new TableColumn<>("Id");
+//        colAgencyId1.setCellValueFactory(new PropertyValueFactory<>("AgencyId"));
+//
+//        colAgncyAddress = new TableColumn<>("Address");
+//        colAgncyAddress.setCellValueFactory(new PropertyValueFactory<>("AgncyAddress"));
+//
+//        colAgncyCity= new TableColumn<>("City");
+//        colAgncyCity.setCellValueFactory(new PropertyValueFactory<>("AgncyCity"));
+//
+//        colAgncyProv = new TableColumn<>("Province");
+//        colAgncyProv.setCellValueFactory(new PropertyValueFactory<>("AgncyProv"));
+//
+//        colAgncyPostal = new TableColumn<>("Postal Code");
+//        colAgncyPostal.setCellValueFactory(new PropertyValueFactory<>("AgncyPostal"));
+//
+//        colAgncyCountry = new TableColumn<>("Country");
+//        colAgncyCountry.setCellValueFactory(new PropertyValueFactory<>("AgncyCountry"));
+//
+//        colAgncyPhone = new TableColumn<>("Phone");
+//        colAgncyPhone.setCellValueFactory(new PropertyValueFactory<>("AgncyPhone"));
+//
+//        colAgncyFax= new TableColumn<>("Fax");
+//        colAgncyFax.setCellValueFactory(new PropertyValueFactory<>("AgncyFax"));
+//
+//        tblAgencies.getColumns().add(colAgencyId1);
+//        tblAgencies.getColumns().add(colAgncyAddress);
+//        tblAgencies.getColumns().add(colAgncyCity);
+//        tblAgencies.getColumns().add(colAgncyProv);
+//        tblAgencies.getColumns().add(colAgncyPostal);
+//        tblAgencies.getColumns().add(colAgncyCountry);
+//        tblAgencies.getColumns().add(colAgncyPhone);
+//        tblAgencies.getColumns().add(colAgncyFax);
+//        RefreshAgencyTableView();
+//    }
 
 
     private void refreshAgentTableView() {
@@ -782,22 +794,25 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
             tblAgencies.getItems().add(ay);
         }
     }
-
+    private void RefreshAgencyTableViewSingle(int x) {
+        tblAgencies.getItems().clear();
+        Agency ay = _agencyDb.getAgency(x);
+        tblAgencies.getItems().add(ay);
+    }
 
     public void UpdateAgent(){
         try {
-
             // VALIDATE !!!
             if(true) {
 
                 int agentId = Integer.parseInt(tfAgentId.getText());
                 Integer newAgencyId = Integer.parseInt(tfAgencyId.getText());
-                String newagtFirstName = tfAgtFirstName.getText();
-                String newagtMiddleInitial = tfAgtMiddleInitial.getText();
-                String newagtLastName = tfAgtLastName.getText();
-                String newagtBusPhone = tfAgtBusPhone.getText();
-                String newagtEmail = tfAgtEmail.getText();
-                String newagtPosition = tfAgtPosition.getText();
+                String newagtFirstName = tfAgtFirstName.getText().trim();
+                String newagtMiddleInitial = tfAgtMiddleInitial.getText().trim();
+                String newagtLastName = tfAgtLastName.getText().trim();
+                String newagtBusPhone = tfAgtBusPhone.getText().trim();
+                String newagtEmail = tfAgtEmail.getText().trim();
+                String newagtPosition = tfAgtPosition.getText().trim();
 
                 Agent newAgent = new Agent(agentId, newagtFirstName, newagtMiddleInitial, newagtLastName, newagtBusPhone, newagtEmail, newagtPosition, newAgencyId );
 

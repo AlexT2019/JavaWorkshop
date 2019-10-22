@@ -121,7 +121,6 @@ public class Agent {
         this.agtEmail = agent.agtEmail;
         this.agtPosition = agent.agtPosition;
         this.agencyId = agent.agencyId;
-
     }
 
 
