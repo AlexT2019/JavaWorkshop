@@ -767,6 +767,9 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         String message = _agentDb.insertAgent(newAgent);
         refreshAgentTableView();
         System.out.println("Added new fresh meat#: " + message);
+                Alert a = new Alert(Alert.AlertType.INFORMATION, "Fresh meat on our team!");
+                a.show();
+
         ClearAgentInputData();}
         } catch (Exception e) {
             e.printStackTrace();
