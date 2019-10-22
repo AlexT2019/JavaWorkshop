@@ -69,18 +69,7 @@
                                        </font>
                                     </Label>
                                     <ImageView fx:id="imageViewAgentPhoto" fitHeight="204.0" fitWidth="200.0" layoutX="466.0" layoutY="454.0" pickOnBounds="true" preserveRatio="true" />
-                                    <TableView fx:id="tblAgencies" layoutX="262.0" layoutY="437.0" prefHeight="96.0" prefWidth="980.0">
-                                       <columns>
-                                          <TableColumn fx:id="colAgencyId" editable="false" prefWidth="43.0" text="ID" />
-                                          <TableColumn fx:id="colAgncyAddress" editable="false" minWidth="0.0" prefWidth="183.0" text="Address" />
-                                          <TableColumn fx:id="colAgncyCity" editable="false" prefWidth="134.0" text="City" />
-                                          <TableColumn fx:id="colAgncyProv" editable="false" prefWidth="55.0" text="Province" />
-                                          <TableColumn fx:id="colAgncyPostal" editable="false" prefWidth="89.0" text="Postal" />
-                                          <TableColumn fx:id="colAgncyCountry" editable="false" prefWidth="69.0" text="Country" />
-                                          <TableColumn fx:id="colAgncyPhone" editable="false" prefWidth="169.0" text="Phone" />
-                                          <TableColumn fx:id="colAgncyFax" editable="false" prefWidth="122.0" text="Fax" />
-                                       </columns>
-                                    </TableView>
+                                    <TableView fx:id="tblAgencies" layoutX="262.0" layoutY="437.0" prefHeight="96.0" prefWidth="980.0" />
                                     <Label layoutX="262.0" layoutY="410.0" text="Agencies">
                                        <font>
                                           <Font name="System Bold" size="18.0" />

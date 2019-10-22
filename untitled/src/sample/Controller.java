@@ -4,6 +4,7 @@ import java.lang.annotation.Target;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import data.AgencyDB;
 import data.AgentDB;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -18,12 +19,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import model.Agency;
 import model.Agent;
 
 
 public class Controller {
 
 private ObservableList<Agent> agents = FXCollections.observableArrayList();
+private ObservableList<Agency> agencies = FXCollections.observableArrayList();
 
     @FXML // fx:id="tabAgents"
     private Tab tabAgents; // Value injected by FXMLLoader
@@ -70,41 +73,23 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     private AnchorPane anpEmp;
 
     @FXML
-    private TableView tblAgents;
+    private TableView tblAgents, tblAgencies;
 
     @FXML
     private TableColumn<String, Agent> colAgentId, colAgtFirstName, colAgtMiddleInitial, colAgtLastName, colAgtBusPhone, colAgtEmail, colAgtPosition, colAgencyId;
 
     @FXML
-    private TextField tfAgentId,  tfAgtFirstName, tfAgtMiddleInitial, tfAgtLastName, tfAgtBusPhone, tfAgtEmail, tfAgtPosition, tfAgencyId;
+    private TextField tfAgentId, tfAgtFirstName, tfAgtMiddleInitial, tfAgtLastName, tfAgtBusPhone, tfAgtEmail, tfAgtPosition, tfAgencyId;
 
 
     @FXML
     private ImageView imageViewAgentPhoto;
 
-    @FXML
-    private TableView<?> tblAgencies;
+
 
     @FXML
-    private TableColumn<?, ?> colAgncyAddress;
-
-    @FXML
-    private TableColumn<?, ?> colAgncyCity;
-
-    @FXML
-    private TableColumn<?, ?> colAgncyProv;
-
-    @FXML
-    private TableColumn<?, ?> colAgncyPostal;
-
-    @FXML
-    private TableColumn<?, ?> colAgncyCountry;
-
-    @FXML
-    private TableColumn<?, ?> colAgncyPhone;
-
-    @FXML
-    private TableColumn<?, ?> colAgncyFax;
+    private TableColumn<String, Agency> colAgncyId1, colAgncyAddress, colAgncyCity,colAgncyProv, colAgncyPostal, colAgncyCountry,
+   colAgncyPhone, colAgncyFax;
 
     @FXML
     private AnchorPane apControls;
@@ -391,11 +376,18 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     private DatePicker datepicker23;
 
     Agent _selectedAgent;
+    Agency _selectedAgency;
+
     int _selectedAgentIndex;
+    int _selectedAgencyIndex;
 
     AgentDB _agentDb;
+    AgencyDB _agencyDb;
+
+
     private void initRestService() {
         _agentDb = new AgentDB(new data.dummy.AgentData());
+        _agencyDb = new AgencyDB(new data.dummy.AgencyData());
     }
 
     @FXML
@@ -621,20 +613,6 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
                     }
                 }
         );
-/*
-        tblAgents.selectionModelProperty().addListener((Observable observable) -> {
-                   // int index = tblAgents.getSelectionModel().getSelectedIndex();
-                    _selectedAgent = (Agent) tblAgents.getItems().get(index);
-                    _selectedAgentIndex = index;
-
-                    System.out.println("Selected Agent" + _selectedAgent.toString());
-                    System.out.println("Selected AgentIndex" + _selectedAgentIndex);
-
-            tfAgentId.setText(String.valueOf(_selectedAgent.getAgentId()));
-            tfAgtFirstName.setText(_selectedAgent.getAgtFirstName());
-
-                }
-        ); */
 
     }
 
@@ -707,6 +685,45 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         refreshAgentTableView();
     }
 
+    public void LoadAgencies(){
+        _agencyDb = new AgencyDB(new data.dummy.AgencyData());
+        agencies = FXCollections.observableArrayList( _agencyDb.getAgencyList());
+
+        colAgencyId1 = new TableColumn<>("Id");
+        colAgencyId1.setCellValueFactory(new PropertyValueFactory<>("AgencyId"));
+
+        colAgncyAddress = new TableColumn<>("Address");
+        colAgncyAddress.setCellValueFactory(new PropertyValueFactory<>("AgncyAddress"));
+
+        colAgncyCity= new TableColumn<>("City");
+        colAgncyCity.setCellValueFactory(new PropertyValueFactory<>("AgncyCity"));
+
+        colAgncyProv = new TableColumn<>("Province");
+        colAgncyProv.setCellValueFactory(new PropertyValueFactory<>("AgncyProv"));
+
+        colAgncyPostal = new TableColumn<>("Postal Code");
+        colAgncyPostal.setCellValueFactory(new PropertyValueFactory<>("AgncyPostal"));
+
+        colAgncyCountry = new TableColumn<>("Country");
+        colAgncyCountry.setCellValueFactory(new PropertyValueFactory<>("AgncyCountry"));
+
+        colAgncyPhone = new TableColumn<>("Phone");
+        colAgncyPhone.setCellValueFactory(new PropertyValueFactory<>("AgncyPhone"));
+
+        colAgncyFax= new TableColumn<>("Fax");
+        colAgncyFax.setCellValueFactory(new PropertyValueFactory<>("AgncyFax"));
+
+        tblAgencies.getColumns().add(colAgencyId1);
+        tblAgencies.getColumns().add(colAgncyAddress);
+        tblAgencies.getColumns().add(colAgncyCity);
+        tblAgencies.getColumns().add(colAgncyProv);
+        tblAgencies.getColumns().add(colAgncyPostal);
+        tblAgencies.getColumns().add(colAgncyCountry);
+        tblAgencies.getColumns().add( colAgncyPhone);
+        tblAgencies.getColumns().add(colAgncyFax);
+    }
+
+
     private void refreshAgentTableView() {
         tblAgents.getItems().clear();
 
@@ -714,6 +731,9 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
             tblAgents.getItems().add(a);
         }
     }
+
+
+
 
     public void UpdateAgent(){
         try {
