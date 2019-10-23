@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -139,7 +140,6 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     private TableColumn<String, Supplier> colSupplierId, colSuppName;
 
     /*
-
     @FXML
     private TableView<?> tblBookings;
 
@@ -187,16 +187,11 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     private TableColumn<?, ?> colAgncyFax1;
 
 */
-
-
-
     @FXML
     private TableView<?> tblAgencies1;
 
     @FXML
     private TableColumn<?, ?> colAgencyId1;
-
-
 
     @FXML
     private TextField tfCustId, tfCustFirstName, tfCustMiddleInitial, tfCustLastName, tfCustPhone, tfCustEmail, tfCustNotes, tf6,tf7, tf8,
@@ -310,33 +305,39 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     }
 
     @FXML
-    void OnMouseEnteredLoginBtn(MouseEvent event) {
+    public void OnMouseEnteredLoginBtn(MouseEvent event) {
 
     }
 
     @FXML
-    void onActionBtnExit(ActionEvent event) {
+    public void onActionBtnExit(ActionEvent event) {
         Platform.exit();
     }
 
     @FXML
-    void onActionBtnLoginClick(ActionEvent event) {
+    void onTFpassKeyPressed(KeyEvent event) {
+        CheckLoginStartPage();
+    }
+
+
+    @FXML
+   public void onActionBtnLoginClick(ActionEvent event) {
         //if login was successful, then set this after login was ran
         DisableLoginEnableLogout();
     }
 
     @FXML
-    void onActionBtnLogoutClick(ActionEvent event) {
+    public void onActionBtnLogoutClick(ActionEvent event) {
         EnableLoginDisableLogout();
     }
 
     @FXML
-    void onUpdateAgentBtnClick(MouseEvent event) {
+    public void onUpdateAgentBtnClick(MouseEvent event) {
         UpdateAgent();
         refreshAgentTableView();
     }
     @FXML
-    void onClearAgentBtnClick(MouseEvent event) {
+    public void onClearAgentBtnClick(MouseEvent event) {
         ClearAgentInputData();
     }
 
@@ -481,11 +482,19 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         loadProducts();
         loadSuppliers();
 
-        tblAgents.setOnMouseClicked((MouseEvent event) -> {
-                    if (event.getButton().equals(MouseButton.PRIMARY)) {
-                        int index = tblAgents.getSelectionModel().getSelectedIndex();
-                        _selectedAgent = (Agent) tblAgents.getItems().get(index);
-                        _selectedAgentIndex = index;
+        btnLogin.setDisable(true);
+        btnLogOut.setDisable(true);
+        CheckLoginStartPage();
+
+        //EnableLoginDisableLogout();
+
+
+
+        tblAgents.setOnMouseClicked((MouseEvent eventAgt) -> {
+                    if (eventAgt.getButton().equals(MouseButton.PRIMARY)) {
+                        int indexAgt = tblAgents.getSelectionModel().getSelectedIndex();
+                        _selectedAgent = (Agent) tblAgents.getItems().get(indexAgt);
+                        _selectedAgentIndex = indexAgt;
 
                         System.out.println("Selected Agent" + _selectedAgent.toString());
                         System.out.println("Selected AgentIndex" + _selectedAgentIndex);
@@ -501,7 +510,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
                         sendThisIndex = Integer.valueOf(_selectedAgent.getAgencyId());
                       //  LoadAgency(sendThisIndex);
                         RefreshAgencyTableViewSingle(sendThisIndex);
-                    }
+                        }
                 }
         );
 
@@ -515,11 +524,11 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         );
 
 
-        tblProducts.setOnMouseClicked((MouseEvent event) -> {
-                    if (event.getButton().equals(MouseButton.PRIMARY)) {
-                        int index = tblProducts.getSelectionModel().getSelectedIndex();
-                        _selectedProduct = (Product) tblProducts.getItems().get(index);
-                        _selectedProductIndex = index;
+        tblProducts.setOnMouseClicked((MouseEvent eventP) -> {
+                    if (eventP.getButton().equals(MouseButton.PRIMARY)) {
+                        int indexP = tblProducts.getSelectionModel().getSelectedIndex();
+                        _selectedProduct = (Product) tblProducts.getItems().get(indexP);
+                        _selectedProductIndex = indexP;
 
                         System.out.println("Selected Product" + _selectedProduct.toString());
                         System.out.println("Selected ProductIndex" + _selectedProductIndex);
@@ -534,11 +543,11 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
                 }
         );
 
-        tblSuppliers.setOnMouseClicked((MouseEvent event) -> {
-                    if (event.getButton().equals(MouseButton.PRIMARY)) {
-                        int index = tblSuppliers.getSelectionModel().getSelectedIndex();
-                        _selectedSupplier = (Supplier) tblSuppliers.getItems().get(index);
-                        _selectedSupplierIndex = index;
+        tblSuppliers.setOnMouseClicked((MouseEvent eventS) -> {
+                    if (eventS.getButton().equals(MouseButton.PRIMARY)) {
+                        int indexS = tblSuppliers.getSelectionModel().getSelectedIndex();
+                        _selectedSupplier = (Supplier) tblSuppliers.getItems().get(indexS);
+                        _selectedSupplierIndex = indexS;
 
                         System.out.println("Selected Supplier" + _selectedSupplier.toString());
                         System.out.println("Selected SupplierIndex" + _selectedSupplierIndex);
@@ -554,14 +563,26 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         );
     }
 
+    public void  CheckLoginStartPage()
+    {
+        if (tfUserName.getLength()  > 1  && tfUserPass.getLength() > 1  ) {
+            btnLogin.setDisable(false);
+        } else {
+            btnLogin.setDisable(true);
+        }
+
+    }
+
 
     //method below will enable login and disable logout button
     //run it as default or when login was NOT successful
     public void EnableLoginDisableLogout() {
+
         btnLogin.setDisable(false);
         btnLogOut.setDisable(true);
 
         tabAgents.setDisable(true);
+        tabSandP.setDisable(true);
         tabCustomers.setDisable(true);
         tabEmployees.setDisable(true);
         tabFuture.setDisable(true);
@@ -576,6 +597,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         btnLogOut.setDisable(false);
 
         tabAgents.setDisable(false);
+        tabSandP.setDisable(false);
         tabCustomers.setDisable(false);
         tabEmployees.setDisable(false);
         tabFuture.setDisable(false);
@@ -639,8 +661,6 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
 
         tblProducts.getColumns().add(colProductId);
         tblProducts.getColumns().add(colProdName);
-
-
         RefreshProductTableViewSingle(sendThisProductIndex);
     }
 
@@ -656,8 +676,6 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
 
         tblSuppliers.getColumns().add(colSupplierId);
         tblSuppliers.getColumns().add(colSuppName);
-
-
         RefreshSupplierTableViewSingle(sendThisSupplierIndex);
     }
 
@@ -913,7 +931,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
                 Alert a = new Alert(Alert.AlertType.INFORMATION, "Fresh products for our customers!!!");
                 a.show();
 
-                ClearProductInputData();}
+                ClearProductInputData(); }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -935,7 +953,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
                 Alert a = new Alert(Alert.AlertType.INFORMATION, "Fresh supplier was successfully added!");
                 a.show();
 
-                ClearSupplierInputData();}
+                ClearSupplierInputData();  }
         } catch (Exception e) {
             e.printStackTrace();
         }
