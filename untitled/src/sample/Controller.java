@@ -6,6 +6,8 @@ import java.util.ResourceBundle;
 
 import data.AgencyDB;
 import data.AgentDB;
+import data.ProductDB;
+import data.SupplierDB;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.Observable;
@@ -21,12 +23,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Agency;
 import model.Agent;
+import model.Product;
+import model.Supplier;
 
 
 public class Controller {
 
 private ObservableList<Agent> agents = FXCollections.observableArrayList();
 private ObservableList<Agency> agencies = FXCollections.observableArrayList();
+private ObservableList<Product> products = FXCollections.observableArrayList();
+private ObservableList<Supplier> suppliers = FXCollections.observableArrayList();
 
     @FXML // fx:id="tabAgents"
     private Tab tabAgents; // Value injected by FXMLLoader
@@ -46,12 +52,18 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     @FXML // fx:id="tabEmployees"
     private Tab tabEmployees; // Value injected by FXMLLoader
 
-    @FXML // fx:id="tblSuppliers"
-    private TableView<?> tblSuppliers; // Value injected by FXMLLoader
+   // @FXML // fx:id="tblSuppliers"
+  //  private TableView<?> tblSuppliers; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tfSupplierId"
+    private TextField tfSupplierId; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tfSupplierName"
+    private TextField tfSupplierName; // Value injected by FXMLLoader
 
 
-    @FXML // fx:id="tblProducts"
-    private TableView<?> tblProducts; // Value injected by FXMLLoader
+  //  @FXML // fx:id="tblProducts"
+  // private TableView<?> tblProducts; // Value injected by FXMLLoader
 
     @FXML // fx:id="btnAddProd"
     private Button btnAddProd; // Value injected by FXMLLoader
@@ -108,17 +120,25 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     private AnchorPane anpEmp, apControls, anpEmp1, apCredentials, apControls1, anpEmp11, anpEmp3, apControls3;
 
     @FXML
-    private TableView tblAgents, tblAgencies;
+    private TableView tblAgents, tblAgencies, tblProducts, tblSuppliers;
 
     @FXML
     private TableColumn<String, Agent> colAgentId, colAgtFirstName, colAgtMiddleInitial, colAgtLastName, colAgtBusPhone, colAgtEmail, colAgtPosition, colAgencyId;
 
     @FXML
-    private ImageView imageViewAgentPhoto;
+    private TableColumn<String, Agency> colAgncyId1, colAgncyAddress, colAgncyCity,colAgncyProv, colAgncyPostal, colAgncyCountry,
+            colAgncyPhone, colAgncyFax;
 
     @FXML
-    private TableColumn<String, Agency> colAgncyId1, colAgncyAddress, colAgncyCity,colAgncyProv, colAgncyPostal, colAgncyCountry,
-   colAgncyPhone, colAgncyFax;
+    private ImageView imageViewAgentPhoto, imageViewAgentPhoto1;
+
+    @FXML
+    private TableColumn<String, Product> colProductId, colProdName;
+
+    @FXML
+    private TableColumn<String, Supplier> colSupplierId, colSuppName;
+
+    /*
 
     @FXML
     private TableView<?> tblBookings;
@@ -144,16 +164,8 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     @FXML
     private TableColumn<?, ?> colAgtPosition1;
 
-    @FXML
-    private ImageView imageViewAgentPhoto1;
 
-    @FXML
-    private TableView<?> tblAgencies1;
-
-    @FXML
-    private TableColumn<?, ?> colAgencyId1;
-
-    @FXML
+   @FXML
     private TableColumn<?, ?> colAgncyAddress1;
 
     @FXML
@@ -173,6 +185,17 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
 
     @FXML
     private TableColumn<?, ?> colAgncyFax1;
+
+*/
+
+
+
+    @FXML
+    private TableView<?> tblAgencies1;
+
+    @FXML
+    private TableColumn<?, ?> colAgencyId1;
+
 
 
     @FXML
@@ -195,8 +218,6 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
 
     @FXML
     private DatePicker datepicker13,  datepicker23, dateStartDate, dateEndDate;
-
-
 
     @FXML
     private ComboBox<?> cbPackageId;
@@ -227,7 +248,6 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
 
     @FXML
     private TableColumn<?, ?> colPkgAgencyComm;
-
 
 
     @FXML
@@ -261,22 +281,38 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     }
 
 
-
-
     Agent _selectedAgent;
     Agency _selectedAgency;
+
+    Product _selectedProduct;
+    Supplier _selectedSupplier;
+
+
 
     int _selectedAgentIndex;
     int _selectedAgencyIndex;
     int sendThisIndex = 1;
+    int sendThisProductIndex = 1;
+    int sendThisSupplierIndex = 1;
+
+
+    int _selectedProductIndex;
+    int _selectedSupplierIndex;
+
 
     AgentDB _agentDb;
     AgencyDB _agencyDb;
+
+    ProductDB _productDb;
+    SupplierDB _supplierDb;
 
 
     private void initRestService() {
         _agentDb = new AgentDB(new data.dummy.AgentData());
         _agencyDb = new AgencyDB(new data.dummy.AgencyData());
+
+        _productDb = new ProductDB(new data.dummy.ProductData());
+        _supplierDb = new SupplierDB(new data.dummy.SupplierData());
     }
 
     @FXML
@@ -445,10 +481,13 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
         assert btnUpdateSupplier != null : "fx:id=\"btnUpdateSupplier\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert btnClearSupplier != null : "fx:id=\"btnClearSupplier\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert btnExit != null : "fx:id=\"btnExit\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-
+        assert tfSupplierId != null : "fx:id=\"tfSupplierId\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+        assert tfSupplierName != null : "fx:id=\"tfSupplierName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
 
         loadAgents();
         LoadAgencies();
+        loadProducts();
+        loadSuppliers();
 
         tblAgents.setOnMouseClicked((MouseEvent event) -> {
                     if (event.getButton().equals(MouseButton.PRIMARY)) {
@@ -483,7 +522,46 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
                 }
         );
 
+
+        tblProducts.setOnMouseClicked((MouseEvent event) -> {
+                    if (event.getButton().equals(MouseButton.PRIMARY)) {
+                        int index = tblProducts.getSelectionModel().getSelectedIndex();
+                        _selectedProduct = (Product) tblProducts.getItems().get(index);
+                        _selectedProductIndex = index;
+
+                        System.out.println("Selected Product" + _selectedProduct.toString());
+                        System.out.println("Selected ProductIndex" + _selectedProductIndex);
+
+                        tfProdId.setText(String.valueOf(_selectedProduct.getProductId()));
+                        tfProdName.setText(_selectedProduct.getProdName());
+
+                        sendThisProductIndex = Integer.valueOf(_selectedProduct.getProductId());
+                        //  LoadAgency(sendThisIndex);
+                        RefreshProductTableViewSingle(sendThisProductIndex);
+                    }
+                }
+        );
+
+        tblSuppliers.setOnMouseClicked((MouseEvent event) -> {
+                    if (event.getButton().equals(MouseButton.PRIMARY)) {
+                        int index = tblSuppliers.getSelectionModel().getSelectedIndex();
+                        _selectedSupplier = (Supplier) tblSuppliers.getItems().get(index);
+                        _selectedSupplierIndex = index;
+
+                        System.out.println("Selected Supplier" + _selectedSupplier.toString());
+                        System.out.println("Selected SupplierIndex" + _selectedSupplierIndex);
+
+                        tfSupplierId.setText(String.valueOf(_selectedSupplier.getSupplierId()));
+                        tfSupplierName.setText(_selectedSupplier.getSupName());
+
+                        sendThisSupplierIndex = Integer.valueOf(_selectedSupplier.getSupplierId());
+                        //  LoadAgency(sendThisIndex);
+                        RefreshSupplierTableViewSingle(sendThisSupplierIndex);
+                    }
+                }
+        );
     }
+
 
     //method below will enable login and disable logout button
     //run it as default or when login was NOT successful
@@ -555,6 +633,45 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
             RefreshAgencyTableView();
         //RefreshAgencyTableViewSingle(sendThisIndex);
     }
+
+    public void loadProducts() {
+
+        _productDb = new ProductDB(new data.dummy.ProductData());
+        products = FXCollections.observableArrayList(_productDb.getProductList());
+
+        colProductId = new TableColumn<>("Product Id");
+        colProductId.setCellValueFactory(new PropertyValueFactory<>("productId"));
+
+        colProdName= new TableColumn<>("Product Name");
+        colProdName.setCellValueFactory(new PropertyValueFactory<>("prodName"));
+
+        tblProducts.getColumns().add(colProductId);
+        tblProducts.getColumns().add(colProdName);
+
+
+        RefreshProductTableViewSingle(sendThisProductIndex);
+    }
+
+    public void loadSuppliers() {
+
+        _supplierDb = new SupplierDB(new data.dummy.SupplierData());
+       suppliers = FXCollections.observableArrayList(_supplierDb.getSupplierList());
+
+        colSupplierId = new TableColumn<>("Supplier Id");
+        colSupplierId.setCellValueFactory(new PropertyValueFactory<>("supplierId"));
+
+        colSuppName= new TableColumn<>("Supplier Name");
+        colSuppName.setCellValueFactory(new PropertyValueFactory<>("suppName"));
+
+        tblSuppliers.getColumns().add(colSupplierId);
+        tblSuppliers.getColumns().add(colSuppName);
+
+
+        RefreshSupplierTableViewSingle(sendThisSupplierIndex);
+    }
+
+
+
 
     public void LoadAgencies(){
         _agencyDb = new AgencyDB(new data.dummy.AgencyData());
@@ -649,11 +766,84 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
             tblAgencies.getItems().add(ay);
         }
     }
+    private void RefreshProductsTableView() {
+        tblProducts.getItems().clear();
+
+        for (Product py: products) {
+            tblProducts.getItems().add(py);
+        }
+    }
+    private void RefreshSuppliersTableView() {
+        tblSuppliers.getItems().clear();
+
+        for (Supplier sy: suppliers) {
+            tblSuppliers.getItems().add(sy);
+        }
+    }
+
+
     private void RefreshAgencyTableViewSingle(int x) {
         tblAgencies.getItems().clear();
         Agency ay = _agencyDb.getAgency(x);
         tblAgencies.getItems().add(ay);
     }
+
+    private void RefreshProductTableViewSingle(int xP) {
+        tblProducts.getItems().clear();
+        Product py = _productDb.getProduct(xP);
+        tblProducts.getItems().add(py);
+    }
+
+    private void RefreshSupplierTableViewSingle(int xS) {
+        tblSuppliers.getItems().clear();
+        Supplier sy = _supplierDb.getSupplier(xS);
+        tblSuppliers.getItems().add(sy);
+    }
+
+
+    public void UpdateProduct(){
+        try {
+            // VALIDATE !!!
+            if(true) {
+
+                int productId = Integer.parseInt(tfProdId.getText().trim());
+
+                String newProdName = tfProdName.getText().trim();
+
+                Product newProduct = new Product(productId, newProdName);
+
+                _productDb = new ProductDB(new data.dummy.ProductData());
+                String message = _productDb.updateProduct(_selectedProduct, newProduct);
+                RefreshProductsTableView();
+                System.out.println("Update product so it doesn't go stale:" + message);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void UpdateSupplier(){
+        try {
+            // VALIDATE !!!
+            if(true) {
+
+                int supplierId = Integer.parseInt(tfSupplierId.getText().trim());
+                String newSuppName = tfSupplierName.getText().trim();
+
+               Supplier newSupplier = new Supplier(supplierId, newSuppName);
+
+                _supplierDb = new SupplierDB(new data.dummy.SupplierData());
+                String message = _supplierDb.updateSupplier(_selectedSupplier, newSupplier);
+                RefreshSuppliersTableView();
+                System.out.println("Update supplier:" + message);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public void UpdateAgent(){
         try {
@@ -681,6 +871,9 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
         }
 
     }
+
+
+
     public void DeleteSelectedAgent(){
         int agentId = Integer.parseInt(tfAgentId.getText());
         String message = _agentDb.deleteAgent(agentId);

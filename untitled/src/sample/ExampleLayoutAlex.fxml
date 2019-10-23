@@ -135,8 +135,8 @@
                                           <TextField fx:id="tfProdId" layoutX="113.0" layoutY="20.0" prefHeight="25.0" prefWidth="52.0" />
                                           <TextField fx:id="tfProdName" layoutX="113.0" layoutY="50.0" prefHeight="25.0" prefWidth="299.0" />
                                           <Label layoutX="775.0" layoutY="24.0" text="Supplier Id:" />
-                                          <TextField fx:id="tfProdId1" layoutX="848.0" layoutY="12.0" prefHeight="25.0" prefWidth="52.0" />
-                                          <TextField fx:id="tfProdName1" layoutX="848.0" layoutY="50.0" prefHeight="25.0" prefWidth="269.0" />
+                                          <TextField fx:id="tfSupplierId" layoutX="848.0" layoutY="12.0" prefHeight="25.0" prefWidth="52.0" />
+                                          <TextField fx:id="tfSupplierName" layoutX="848.0" layoutY="50.0" prefHeight="25.0" prefWidth="269.0" />
                                           <Label layoutX="775.0" layoutY="54.0" text="Supplier" />
                                           <Button fx:id="btnAddSupplier" layoutX="943.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#btnAddSupplierOnMouseClick" text="Add Supplier" />
                                           <Button fx:id="btnUpdateSupplier" layoutX="1033.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#btnUpdateSupplierOnMouseClick" text="Update Supplier" />
