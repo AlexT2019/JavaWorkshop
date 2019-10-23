@@ -482,11 +482,8 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         loadProducts();
         loadSuppliers();
 
-        btnLogin.setDisable(true);
-        btnLogOut.setDisable(true);
+        DisableAll();
         CheckLoginStartPage();
-
-        //EnableLoginDisableLogout();
 
 
 
@@ -577,6 +574,10 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     //method below will enable login and disable logout button
     //run it as default or when login was NOT successful
     public void EnableLoginDisableLogout() {
+        tfUserName.setDisable(false);
+        tfUserPass.setDisable(false);
+        tfUserName.clear();
+        tfUserPass.clear();
 
         btnLogin.setDisable(false);
         btnLogOut.setDisable(true);
@@ -588,12 +589,14 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         tabFuture.setDisable(true);
         tabPackages.setDisable(true);
         tabReview.setDisable(true);
-
     }
+
     //method below will disable login and enable logout button
     //run it when login was SUCCESSFUL
     public void DisableLoginEnableLogout() {
         btnLogin.setDisable(true);
+        tfUserName.setDisable(true);
+        tfUserPass.setDisable(true);
         btnLogOut.setDisable(false);
 
         tabAgents.setDisable(false);
@@ -604,6 +607,19 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         tabPackages.setDisable(false);
         tabReview.setDisable(false);
     }
+
+    public void DisableAll(){
+        btnLogin.setDisable(true);
+        btnLogOut.setDisable(true);
+        tabAgents.setDisable(true);
+        tabSandP.setDisable(true);
+        tabCustomers.setDisable(true);
+        tabEmployees.setDisable(true);
+        tabFuture.setDisable(true);
+        tabPackages.setDisable(true);
+        tabReview.setDisable(true);
+    }
+
 
     public void loadAgents() {
 
