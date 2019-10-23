@@ -292,6 +292,45 @@
                               </AnchorPane>
                           </content>
                         </Tab>
+                        <Tab fx:id="tabSandP" text="Suppliers And Products">
+                           <content>
+                              <AnchorPane fx:id="anpEmp2" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="1259.0">
+                                 <children>
+                                    <TableView fx:id="tblSUppliers" layoutX="630.0" layoutY="80.0" prefHeight="339.0" prefWidth="602.0" />
+                                    <Label layoutX="630.0" layoutY="41.0" text="All those who supply us with all our goodies">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fx:id="imageViewAgentPhoto1" fitHeight="204.0" fitWidth="200.0" layoutX="466.0" layoutY="454.0" pickOnBounds="true" preserveRatio="true" />
+                                    <TableView fx:id="tblAgencies1" layoutX="27.0" layoutY="79.0" prefHeight="341.0" prefWidth="564.0" />
+                                    <Label layoutX="27.0" layoutY="41.0" text="Products">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <AnchorPane layoutX="28.0" layoutY="443.0" prefHeight="200.0" prefWidth="1212.0">
+                                       <children>
+                                          <Button fx:id="btnAddProd" layoutX="208.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#btnAddProdOnMouseClick" text="Add Product" />
+                                          <Button fx:id="btnUpdateProd" layoutX="298.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#btnUpdateProdOnMouseClick" text="Update Product" />
+                                          <Button fx:id="btnClearProd" layoutX="113.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#btnClearProdOnMouseClick" text="Clear written" />
+                                          <Label layoutX="21.0" layoutY="24.0" text="Product Id:" />
+                                          <Label layoutX="21.0" layoutY="54.0" text="Product Name" />
+                                          <TextField fx:id="tfProdId" layoutX="113.0" layoutY="20.0" prefHeight="25.0" prefWidth="52.0" />
+                                          <TextField fx:id="tfProdName" layoutX="113.0" layoutY="50.0" prefHeight="25.0" prefWidth="299.0" />
+                                          <Label layoutX="775.0" layoutY="24.0" text="Supplier Id:" />
+                                          <TextField fx:id="tfProdId1" layoutX="848.0" layoutY="12.0" prefHeight="25.0" prefWidth="52.0" />
+                                          <TextField fx:id="tfProdName1" layoutX="848.0" layoutY="50.0" prefHeight="25.0" prefWidth="269.0" />
+                                          <Label layoutX="775.0" layoutY="54.0" text="Supplier" />
+                                          <Button fx:id="btnAddSupplier" layoutX="943.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#btnAddSupplierOnMouseClick" text="Add Supplier" />
+                                          <Button fx:id="btnUpdateSupplier" layoutX="1033.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#btnUpdateSupplierOnMouseClick" text="Update Supplier" />
+                                          <Button fx:id="btnClearSupplier" layoutX="848.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#btnClearSupplierOnMouseClick" text="Clear written" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
                     </tabs>
                   </TabPane>
                </children>
