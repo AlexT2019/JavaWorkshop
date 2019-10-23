@@ -1,5 +1,7 @@
 package sample;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.lang.annotation.Target;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,17 +17,25 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.ImageInput;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import model.Agency;
 import model.Agent;
 import model.Product;
 import model.Supplier;
+
 
 
 public class Controller {
@@ -65,6 +75,10 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
 
   //  @FXML // fx:id="tblProducts"
   // private TableView<?> tblProducts; // Value injected by FXMLLoader
+
+
+    @FXML // fx:id="imgFired"
+    private ImageView imgFired; // Value injected by FXMLLoader
 
     @FXML // fx:id="btnAddProd"
     private Button btnAddProd; // Value injected by FXMLLoader
@@ -210,6 +224,8 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     btnDeletePkg, btnExit, btnInsertCustomer,  btnSaveCustomer, btnUpdateCustomer, btnUpdate,
     btnClearAgent, btnDeleteAgent, btnInsertAgent, btnInsert3,  btnClear3, btnApply3, btnLogin, btnLogOut;
 
+   @FXML // fx:id="pane"
+    private Pane pane; // Value injected by FXMLLoader
 
     @FXML
     private DatePicker datepicker13,  datepicker23, dateStartDate, dateEndDate;
@@ -229,6 +245,9 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     @FXML
     private TableColumn<?, ?> colPkgName;
 
+    @FXML // fx:id="spImage"
+    private StackPane spImage; // Value injected by FXMLLoader
+
     @FXML
     private TableColumn<?, ?> colPkgStartDate;
 
@@ -243,6 +262,9 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
 
     @FXML
     private TableColumn<?, ?> colPkgAgencyComm;
+
+    public Controller() throws FileNotFoundException {
+    }
 
 
     @FXML
@@ -307,6 +329,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     @FXML
     public void OnMouseEnteredLoginBtn(MouseEvent event) {
 
+
     }
 
     @FXML
@@ -317,6 +340,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     @FXML
     void onTFpassKeyPressed(KeyEvent event) {
         CheckLoginStartPage();
+
     }
 
 
@@ -345,8 +369,14 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         DeleteSelectedAgent();
         ClearAgentInputData();
         refreshAgentTableView();
-       Alert a = new Alert(Alert.AlertType.INFORMATION, "You're fired!");
-       a.show();
+       // Image  img = new Image("Fired.gif");
+
+        Alert a = new Alert(Alert.AlertType.INFORMATION,"you are fired!!");
+           a.show();
+
+      //  imgFired.setImage(img);
+       // imgFired.getImage();
+
     }
 
     @FXML
@@ -476,7 +506,8 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         assert btnExit != null : "fx:id=\"btnExit\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert tfSupplierId != null : "fx:id=\"tfSupplierId\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert tfSupplierName != null : "fx:id=\"tfSupplierName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-
+        assert imgFired != null : "fx:id=\"imgFired\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+        assert pane != null : "fx:id=\"pane\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         loadAgents();
         LoadAgencies();
         loadProducts();
@@ -899,11 +930,15 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         String message = _agentDb.deleteAgent(agentId);
         refreshAgentTableView();
         System.out.println("Agent# " + agentId + " was deleted." + message);
+
+
+
     }
 
 
 
     public void InsertAgent(){
+
         try {
             // VALIDATE !!!
             if(true) {
