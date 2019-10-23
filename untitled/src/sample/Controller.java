@@ -358,19 +358,24 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     void onInsertAgentBtnClick(MouseEvent event) {
         InsertAgent();
     }
-
-
-
+    @FXML
+    void onInsertProductBtnClick(MouseEvent event) {
+        InsertProduct();
+    }
+    @FXML
+    void onInsertSupplierBtnClick(MouseEvent event) {
+        InsertSupplier();
+    }
 
   public void ClearAgentInputData(){
-      tfAgentId.setText("");
-      tfAgtPosition.setText("");
-      tfAgtEmail.setText("");
-      tfAgtBusPhone.setText("");
-      tfAgtLastName.setText("");
-      tfAgtFirstName.setText("");
-      tfAgtMiddleInitial.setText("");
-      tfAgencyId.setText("");
+      tfAgentId.clear();
+      tfAgtPosition.clear();
+      tfAgtEmail.clear();
+      tfAgtBusPhone.clear();
+      tfAgtLastName.clear();
+      tfAgtFirstName.clear();
+      tfAgtMiddleInitial.clear();
+      tfAgencyId.clear();
     }
 
     @FXML
@@ -653,8 +658,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     }
 
     public void loadSuppliers() {
-
-        _supplierDb = new SupplierDB(new data.dummy.SupplierData());
+       _supplierDb = new SupplierDB(new data.dummy.SupplierData());
        suppliers = FXCollections.observableArrayList(_supplierDb.getSupplierList());
 
         colSupplierId = new TableColumn<>("Supplier Id");
@@ -750,7 +754,6 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
 //        RefreshAgencyTableView();
 //    }
 
-
     private void refreshAgentTableView() {
         tblAgents.getItems().clear();
 
@@ -820,7 +823,6 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void UpdateSupplier(){
@@ -841,7 +843,6 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -869,9 +870,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
 
 
     public void DeleteSelectedAgent(){
@@ -911,5 +910,56 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
 
     }
 
+    public void InsertProduct(){
+        try {
+            // VALIDATE !!!
+            if(true) {
+                int productId = 999;
+                Integer newProductId = Integer.parseInt(tfProdId.getText().trim());
+                String newProdName = tfProdName.getText().trim();
 
+                Product newProduct = new Product(newProductId, newProdName);
+                _productDb = new ProductDB(new data.dummy.ProductData());
+                String message = _productDb.insertProduct(newProduct);
+                RefreshProductsTableView();
+                System.out.println("New product, (not viagra!!!), added:" + message);
+                Alert a = new Alert(Alert.AlertType.INFORMATION, "Fresh products for our customers!!!");
+                a.show();
+
+                ClearProductInputData();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void InsertSupplier(){
+        try {
+            // VALIDATE !!!
+            if(true) {
+                int supplierId = 999;
+                Integer newSupplierId = Integer.parseInt(tfSupplierId.getText().trim());
+                String newSupplierName = tfSupplierName.getText().trim();
+
+               Supplier newSupplier = new Supplier(newSupplierId, newSupplierName);
+                _supplierDb = new SupplierDB(new data.dummy.SupplierData());
+                String message = _supplierDb.insertSupplier(newSupplier);
+                RefreshSuppliersTableView();
+                System.out.println("New (non illegal drug) supplier added:" + message);
+                Alert a = new Alert(Alert.AlertType.INFORMATION, "Fresh supplier was successfully added!");
+                a.show();
+
+                ClearSupplierInputData();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void ClearProductInputData() {
+        tfProdId.clear();
+        tfProdName.clear();
+    }
+    private void ClearSupplierInputData() {
+        tfSupplierId.clear();
+        tfSupplierName.clear();
+    }
 }
