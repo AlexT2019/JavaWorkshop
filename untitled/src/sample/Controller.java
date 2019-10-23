@@ -95,8 +95,6 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     @FXML // fx:id="anpEmp2"
     private AnchorPane anpEmp2; // Value injected by FXMLLoader
 
-
-
     @FXML
     private ResourceBundle resources;
 
@@ -107,16 +105,13 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     private PasswordField tfUserPass;
 
     @FXML
-    private AnchorPane anpEmp, apControls, anpEmp1, apCredentials;
+    private AnchorPane anpEmp, apControls, anpEmp1, apCredentials, apControls1, anpEmp11, anpEmp3, apControls3;
 
     @FXML
     private TableView tblAgents, tblAgencies;
 
     @FXML
     private TableColumn<String, Agent> colAgentId, colAgtFirstName, colAgtMiddleInitial, colAgtLastName, colAgtBusPhone, colAgtEmail, colAgtPosition, colAgencyId;
-
-    @FXML
-    private TextField tfUserName, tfAgentId, tfAgtFirstName, tfAgtMiddleInitial, tfAgtLastName, tfAgtBusPhone, tfAgtEmail, tfAgtPosition, tfAgencyId;
 
     @FXML
     private ImageView imageViewAgentPhoto;
@@ -179,12 +174,13 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     @FXML
     private TableColumn<?, ?> colAgncyFax1;
 
-    @FXML
-    private AnchorPane apControls1, anpEmp11;
 
     @FXML
     private TextField tfCustId, tfCustFirstName, tfCustMiddleInitial, tfCustLastName, tfCustPhone, tfCustEmail, tfCustNotes, tf6,tf7, tf8,
-            tf13, tf23,  tf33,  tf43, tf53,  tf63, tf73, tf83, tf93, tfPkgBasePrice, tfAgencyCommission, tfPkgName;
+            tf13, tf23,  tf33,  tf43, tf53,  tf63, tf73, tf83, tf93, tfPkgBasePrice, tfAgencyCommission, tfPkgName, tfUserName, tfAgentId, tfAgtFirstName,
+            tfAgtMiddleInitial, tfAgtLastName, tfAgtBusPhone, tfAgtEmail, tfAgtPosition, tfAgencyId;
+
+
 
     @FXML
     private Label lblID1,  lbl11, lbl21,lbl31, lbl41,lbl71,  lbl51, lbl311, lblID11, lbl211, lbl711, lblID,  lbl1, lbl2, lbl3, lbl4, lbl7,
@@ -195,6 +191,12 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     private Button btnUpdatePackage,btnAddPackage, btnClearPackageTF, btnApplyPackageChanges,
     btnDeletePkg, btnExit, btnInsertCustomer,  btnSaveCustomer, btnUpdateCustomer, btnUpdate,
     btnClearAgent, btnDeleteAgent, btnInsertAgent, btnInsert3,  btnClear3, btnApply3, btnLogin, btnLogOut;
+
+
+    @FXML
+    private DatePicker datepicker13,  datepicker23, dateStartDate, dateEndDate;
+
+
 
     @FXML
     private ComboBox<?> cbPackageId;
@@ -226,13 +228,6 @@ private ObservableList<Agency> agencies = FXCollections.observableArrayList();
     @FXML
     private TableColumn<?, ?> colPkgAgencyComm;
 
-    @FXML
-    private AnchorPane anpEmp3, apControls3;
-
-
-
-    @FXML
-    private DatePicker datepicker13,  datepicker23, dateStartDate, dateEndDate;
 
 
     @FXML
