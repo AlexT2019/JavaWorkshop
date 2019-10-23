@@ -43,14 +43,14 @@
                                           <Image url="@img/travelexperts-logo-vert.jpg" />
                                        </image>
                                     </ImageView>
-                                    <AnchorPane fx:id="apCredentials" layoutX="458.0" layoutY="451.0" prefHeight="132.0" prefWidth="249.0">
+                                    <AnchorPane fx:id="apCredentials" layoutX="458.0" layoutY="451.0" prefHeight="132.0" prefWidth="385.0">
                                        <children>
                                           <Label layoutX="12.0" layoutY="13.0" text="Username:" />
                                           <PasswordField fx:id="tfUserPass" layoutX="79.0" layoutY="39.0" onKeyPressed="#onTFpassKeyPressed" />
                                           <TextField fx:id="tfUserName" layoutX="79.0" layoutY="9.0" />
                                           <Label layoutX="14.0" layoutY="43.0" text="Password:" />
                                           <Button fx:id="btnLogin" layoutX="79.0" layoutY="66.0" mnemonicParsing="false" onAction="#onActionBtnLoginClick" onMouseEntered="#OnMouseEnteredLoginBtn" text="Login" />
-                                          <Button fx:id="btnLogOut" layoutX="174.0" layoutY="66.0" mnemonicParsing="false" onAction="#onActionBtnLogoutClick" text="Logout" />
+                                          <Button fx:id="btnLogOut" layoutX="134.0" layoutY="66.0" mnemonicParsing="false" onAction="#onActionBtnLogoutClick" text="Logout" />
                                        </children>
                                     </AnchorPane>
                                  </children>
