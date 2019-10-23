@@ -252,33 +252,27 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
 
     @FXML
     void btnAddProdOnMouseClick(MouseEvent event) {
-
-    }
+        InsertProduct(); }
 
     @FXML
     void btnAddSupplierOnMouseClick(MouseEvent event) {
-
-    }
+        InsertSupplier(); }
 
     @FXML
     void btnClearProdOnMouseClick(MouseEvent event) {
-
-    }
+        ClearProductInputData(); }
 
     @FXML
     void btnClearSupplierOnMouseClick(MouseEvent event) {
-
-    }
+        ClearSupplierInputData(); }
 
     @FXML
     void btnUpdateProdOnMouseClick(MouseEvent event) {
-
-    }
+        InsertProduct(); }
 
     @FXML
     void btnUpdateSupplierOnMouseClick(MouseEvent event) {
-
-    }
+        InsertSupplier(); }
 
 
     Agent _selectedAgent;
@@ -358,14 +352,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     void onInsertAgentBtnClick(MouseEvent event) {
         InsertAgent();
     }
-    @FXML
-    void onInsertProductBtnClick(MouseEvent event) {
-        InsertProduct();
-    }
-    @FXML
-    void onInsertSupplierBtnClick(MouseEvent event) {
-        InsertSupplier();
-    }
+
 
   public void ClearAgentInputData(){
       tfAgentId.clear();
