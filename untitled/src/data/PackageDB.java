@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import model.Package;
 
 public class PackageDB {
 
@@ -20,17 +21,18 @@ public class PackageDB {
 
     /**
      * Retrieve Package Json and return Package object
-     * @param package_Product_SupplierId - id of the Package
+     * @param packageId - id of the Package
      * @return Package object
      */
-//    public Package getPackage_Product_Supplier(int package_Product_SupplierId) {
-//
-//        gson = new Gson();
-//        String jsonData = this.data.getCustomer(package_Product_SupplierId);
-//        System.out.println("jsonData: " + jsonData);
-//        return gson.fromJson(jsonData, Package_Product_Supplier.class);
-//
-//    }
+    public model.Package getPackage(int packageId) {
+
+        gson = new Gson();
+        String jsonData = this.data.getPackage(packageId);
+        System.out.println("jsonData: " + jsonData);
+        Package pkg = gson.fromJson(jsonData, Package.class);
+        return pkg;
+
+    }
 
     /**
      * Retrieve Package list json and return ArrayList<Package> object
@@ -47,18 +49,18 @@ public class PackageDB {
         return gson.fromJson(jsonData, type);
     }
 
-//    /**
-//     * INSERT a new Package_Product_Supplier in the database
-//     * @param package_Product_Supplier to insert
-//     * @return message of success/failure
-//     */
-//    public String insertPackage_Product_Supplier(Package_Product_Supplier package_Product_Supplier) {
-//
-//        gson = new Gson();
-//        String jsonData = gson.toJson(package_Product_Supplier, Package_Product_Supplier.class);
-//        String response = this.data.insertPackage_Product_Supplier(jsonData);
-//        return response;
-//    }
+    /**
+     * INSERT a new Package in the database
+     * @param pkg to insert
+     * @return message of success/failure
+     */
+    public String insertPackage(model.Package pkg) {
+
+        gson = new Gson();
+        String jsonData = gson.toJson(pkg, model.Package.class);
+        String response = this.data.insertPackage(jsonData);
+        return response;
+    }
 
     /**
      * UPDATE a Package in the database
@@ -80,15 +82,14 @@ public class PackageDB {
         return response;
     }
 
-//    /**
-//     * DELETE an Package_Product_Supplier in the database
-//     * @param packageId of Package_Product_Supplier to delete
-//     * @param product_SupplierId of Package_Product_Supplier to delete
-//     * @return message of success/failure
-//     */
-//    public String deletePackage_Product_Supplier(int packageId, int product_SupplierId) {
-//
-//        return this.data.deletePackage_Product_Supplier(packageId, product_SupplierId);
-//    }
+    /**
+     * DELETE an Package in the database
+     * @param packageId of Package to delete
+     * @return message of success/failure
+     */
+    public String deletePackage(int packageId) {
+
+        return this.data.deletePackage(packageId);
+    }
 
 }

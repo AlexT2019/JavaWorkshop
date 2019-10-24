@@ -421,11 +421,11 @@ public class Controller {
 
 
     private void initRestService() {
-        _agentDb = new AgentDB(new data.dummy.AgentData());
-        _agencyDb = new AgencyDB(new data.dummy.AgencyData());
+        _agentDb = new AgentDB(new data.REST.AgentData());
+        _agencyDb = new AgencyDB(new data.REST.AgencyData());
 
-        _productDb = new ProductDB(new data.dummy.ProductData());
-        _supplierDb = new SupplierDB(new data.dummy.SupplierData());
+        _productDb = new ProductDB(new data.REST.ProductData());
+        _supplierDb = new SupplierDB(new data.REST.SupplierData());
     }
 
     @FXML
@@ -547,7 +547,7 @@ public class Controller {
     {
         ObservableList <Booking> resultlist= FXCollections.observableArrayList() ;
         //get all the bookinglist
-        BookingDB bookingDB = new BookingDB(new data.dummy.BookingData());
+        BookingDB bookingDB = new BookingDB(new data.REST.BookingData());
         bookings = FXCollections.observableArrayList( bookingDB.getBookingList());
 
         for(Booking booking:bookings)
@@ -608,7 +608,7 @@ public class Controller {
             //save the new value entered by user into the db
             try {
 
-                CustomerDB customerdb = new CustomerDB(new data.dummy.CustomerData());
+                CustomerDB customerdb = new CustomerDB(new data.REST.CustomerData());
                 String message = customerdb.insertCustomer(   newCustomer);
                 //add the new customer to my list of customers
                 customers.add(newCustomer);
@@ -665,7 +665,7 @@ public class Controller {
             //save the new value entered by user into the db
             try {
 
-                CustomerDB customerdb = new CustomerDB(new data.dummy.CustomerData());
+                CustomerDB customerdb = new CustomerDB(new data.REST.CustomerData());
                 String message = customerdb.updateCustomer(  oldCustomer, newCustomer);
 
                 oldCustomer.copy(newCustomer);
@@ -936,7 +936,7 @@ public class Controller {
     void loadPackages()
     {
         tblPackages.refresh();
-        PackageDB packageDB = new PackageDB(new data.dummy.PackageData());
+        PackageDB packageDB = new PackageDB(new data.REST.PackageData());
         packages = null;//FXCollections.observableArrayList( packageDB.getPackageList());
 
         //define the table column
@@ -1086,7 +1086,7 @@ public class Controller {
     {
 
         tblCustomers.refresh();
-        CustomerDB customerDB = new CustomerDB(new data.dummy.CustomerData());
+        CustomerDB customerDB = new CustomerDB(new data.REST.CustomerData());
         customers = FXCollections.observableArrayList( customerDB.getCustomerList());
 
         //properties access method
@@ -1230,7 +1230,7 @@ public class Controller {
 
     public void loadAgents() {
 //loads all agents into the table
-        _agentDb = new AgentDB(new data.dummy.AgentData());
+        _agentDb = new AgentDB(new data.REST.AgentData());
         agents = FXCollections.observableArrayList( _agentDb.getAgentList());
 
         colAgentId = new TableColumn<>("Id");
@@ -1273,7 +1273,7 @@ public class Controller {
 
     public void loadProducts() {
         //loads all products
-        _productDb = new ProductDB(new data.dummy.ProductData());
+        _productDb = new ProductDB(new data.REST.ProductData());
         products = FXCollections.observableArrayList(_productDb.getProductList());
 
         colProductId = new TableColumn<>("Product Id");
@@ -1289,7 +1289,7 @@ public class Controller {
 
     public void loadSuppliers() {
         //loads all suppliers
-        _supplierDb = new SupplierDB(new data.dummy.SupplierData());
+        _supplierDb = new SupplierDB(new data.REST.SupplierData());
         suppliers = FXCollections.observableArrayList(_supplierDb.getSupplierList());
 
         colSupplierId = new TableColumn<>("Supplier Id");
@@ -1307,7 +1307,7 @@ public class Controller {
 
 
     public void LoadAgencies(){
-        _agencyDb = new AgencyDB(new data.dummy.AgencyData());
+        _agencyDb = new AgencyDB(new data.REST.AgencyData());
         agencies = FXCollections.observableArrayList( _agencyDb.getAgencyList());
 
         colAgencyId1 = new TableColumn<>("Id");
@@ -1444,7 +1444,7 @@ public class Controller {
 
                 Product newProduct = new Product(productId, newProdName);
 
-                _productDb = new ProductDB(new data.dummy.ProductData());
+                _productDb = new ProductDB(new data.REST.ProductData());
                 String message = _productDb.updateProduct(_selectedProduct, newProduct);
                 RefreshProductsTableView();
                 System.out.println("Update product so it doesn't go stale:" + message);
@@ -1464,7 +1464,7 @@ public class Controller {
 
                 Supplier newSupplier = new Supplier(supplierId, newSuppName);
 
-                _supplierDb = new SupplierDB(new data.dummy.SupplierData());
+                _supplierDb = new SupplierDB(new data.REST.SupplierData());
                 String message = _supplierDb.updateSupplier(_selectedSupplier, newSupplier);
                 RefreshSuppliersTableView();
                 System.out.println("Update supplier:" + message);
@@ -1489,9 +1489,9 @@ public class Controller {
                 String newagtEmail = tfAgtEmail.getText().trim();
                 String newagtPosition = tfAgtPosition.getText().trim();
 
-                Agent newAgent = new Agent(agentId, newagtFirstName, newagtMiddleInitial, newagtLastName, newagtBusPhone, newagtEmail, newagtPosition, newAgencyId );
+                Agent newAgent = new Agent(agentId, newagtFirstName, newagtMiddleInitial, newagtLastName, newagtBusPhone, newagtEmail, newagtPosition, newAgencyId, null, null );
 
-                _agentDb = new AgentDB(new data.dummy.AgentData());
+                _agentDb = new AgentDB(new data.REST.AgentData());
                 String message = _agentDb.updateAgent(_selectedAgent, newAgent);
                 refreshAgentTableView();
                 System.out.println("Update:" + message);
@@ -1528,8 +1528,8 @@ public class Controller {
                 String newagtEmail = tfAgtEmail.getText().trim();
                 String newagtPosition = tfAgtPosition.getText().trim();
 
-                Agent newAgent = new Agent(agentId, newagtFirstName, newagtMiddleInitial, newagtLastName, newagtBusPhone, newagtEmail, newagtPosition, newAgencyId );
-                _agentDb = new AgentDB(new data.dummy.AgentData());
+                Agent newAgent = new Agent(agentId, newagtFirstName, newagtMiddleInitial, newagtLastName, newagtBusPhone, newagtEmail, newagtPosition, newAgencyId, null, null );
+                _agentDb = new AgentDB(new data.REST.AgentData());
                 String message = _agentDb.insertAgent(newAgent);
                 refreshAgentTableView();
                 System.out.println("Added new fresh meat#: " + message);
@@ -1552,7 +1552,7 @@ public class Controller {
                 String newProdName = tfProdName.getText().trim();
 
                 Product newProduct = new Product(newProductId, newProdName);
-                _productDb = new ProductDB(new data.dummy.ProductData());
+                _productDb = new ProductDB(new data.REST.ProductData());
                 String message = _productDb.insertProduct(newProduct);
                 RefreshProductsTableView();
                 System.out.println("New product, (not viagra!!!), added:" + message);
@@ -1574,7 +1574,7 @@ public class Controller {
                 String newSupplierName = tfSupplierName.getText().trim();
 
                 Supplier newSupplier = new Supplier(newSupplierId, newSupplierName);
-                _supplierDb = new SupplierDB(new data.dummy.SupplierData());
+                _supplierDb = new SupplierDB(new data.REST.SupplierData());
                 String message = _supplierDb.insertSupplier(newSupplier);
                 RefreshSuppliersTableView();
                 System.out.println("New (non illegal drug) supplier added:" + message);

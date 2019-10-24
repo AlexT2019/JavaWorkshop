@@ -8,17 +8,20 @@
 
 package model;
 
-public class Agent {
-        // Member variables
-        private int agentId;
-        private String agtFirstName;        // nullable
-        private String agtMiddleInitial;    // nullable
-        private String agtLastName;         // nullable
-        private String agtBusPhone;         // nullable
-        private String agtEmail;            // nullable
-        private String agtPosition;         // nullable
-        private Integer agencyId;           // nullable
+import java.io.Serializable;
 
+public class Agent implements Serializable {
+    // Member variables
+    private int agentId;
+    private String agtFirstName;        // nullable
+    private String agtMiddleInitial;    // nullable
+    private String agtLastName;         // nullable
+    private String agtBusPhone;         // nullable
+    private String agtEmail;            // nullable
+    private String agtPosition;         // nullable
+    private Integer agencyId;           // nullable
+    private String agtUserId;           // nullable
+    private String agtPassword;         // nullable
 
     public int getAgentId() {
         return agentId;
@@ -84,8 +87,24 @@ public class Agent {
         this.agencyId = agencyId;
     }
 
+    public String getAgtUserId() {
+        return agtUserId;
+    }
+
+    public void setAgtUserId(String agtUserId) {
+        this.agtUserId = agtUserId;
+    }
+
+    public String getAgtPassword() {
+        return agtPassword;
+    }
+
+    public void setAgtPassword(String agtPassword) {
+        this.agtPassword = agtPassword;
+    }
+
     public Agent(int agentId, String agtFirstName, String agtMiddleInitial, String agtLastName,
-                 String agtBusPhone, String agtEmail, String agtPosition, Integer agencyId) {
+                 String agtBusPhone, String agtEmail, String agtPosition, Integer agencyId, String agtUserId, String agtPassword) {
         this.agentId = agentId;
         this.agtFirstName = agtFirstName;
         this.agtMiddleInitial = agtMiddleInitial;
@@ -94,20 +113,13 @@ public class Agent {
         this.agtEmail = agtEmail;
         this.agtPosition = agtPosition;
         this.agencyId = agencyId;
+        this.agtUserId = agtUserId;
+        this.agtPassword = agtPassword;
     }
 
     @Override
     public String toString() {
-        return "Agent{" +
-                "agentId=" + agentId +
-                ", agtFirstName='" + agtFirstName + '\'' +
-                ", agtMiddleInitial='" + agtMiddleInitial + '\'' +
-                ", agtLastName='" + agtLastName + '\'' +
-                ", agtBusPhone='" + agtBusPhone + '\'' +
-                ", agtEmail='" + agtEmail + '\'' +
-                ", agtPosition='" + agtPosition + '\'' +
-                ", agencyId=" + agencyId +
-                '}';
+        return agtFirstName + " " + agtLastName;
     }
 
     //copy an agent method
@@ -121,6 +133,7 @@ public class Agent {
         this.agtEmail = agent.agtEmail;
         this.agtPosition = agent.agtPosition;
         this.agencyId = agent.agencyId;
+
     }
 
 
