@@ -385,7 +385,10 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         Alert a = new Alert(Alert.AlertType.INFORMATION,"you are fired!!");
            a.show();
 
-imgFired.toFront();
+           ImageView imgFired = new ImageView("/Fired.gif");
+
+
+imgFired.getClass().getResourceAsStream("/Fired.gif");
 
 
 
