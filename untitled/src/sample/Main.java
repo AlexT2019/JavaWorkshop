@@ -1,5 +1,4 @@
 package sample;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +14,6 @@ public class Main extends Application {
 
 
        Parent root = FXMLLoader.load(getClass().getResource("ExampleLayoutAlexOrigin.fxml"));
-   //     Parent root = FXMLLoader.load(getClass().getResource("Layout2.fxml"));
         primaryStage.setTitle("Hello Agent");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

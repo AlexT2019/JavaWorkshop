@@ -201,9 +201,6 @@ public class Controller {
     private TextArea tfReview; // Value injected by FXMLLoader
 
 
-
-
-
     @FXML // fx:id="btnClearReview"
     private Button btnClearReview; // Value injected by FXMLLoader
 
@@ -255,9 +252,6 @@ public class Controller {
     private TableColumn<?, ?> colAgncyFax1;
 
 */
-
-
-
 
     @FXML
     private TableView tblCustomers;
@@ -333,7 +327,6 @@ public class Controller {
     @FXML
     private TextField tfCustId, tfCustMiddleInitial,  tfCustPhone, tfCustNotes, tf6,tf7, tf8,
             tf13, tf23,  tf33,  tf43, tf53,  tf63, tf73, tf83, tf93, tfPkgBasePrice, tfAgencyCommission, tfPkgName, tfUserName;
-
 
 
     @FXML
@@ -560,13 +553,6 @@ public class Controller {
 
         return resultlist;
     }
-
-
-
-
-
-
-
 
 
 
@@ -908,7 +894,7 @@ public class Controller {
 
                         sendThisProductIndex = Integer.valueOf(_selectedProduct.getProductId());
                         //  LoadAgency(sendThisIndex);
-                        RefreshProductTableViewSingle(sendThisProductIndex);
+                        RefreshProductsTableView();
                     }
                 }
         );
@@ -927,7 +913,7 @@ public class Controller {
 
                         sendThisSupplierIndex = Integer.valueOf(_selectedSupplier.getSupplierId());
                         //  LoadAgency(sendThisIndex);
-                        RefreshSupplierTableViewSingle(sendThisSupplierIndex);
+                        RefreshSuppliersTableView();
                     }
                 }
         );
@@ -1284,7 +1270,7 @@ public class Controller {
 
         tblProducts.getColumns().add(colProductId);
         tblProducts.getColumns().add(colProdName);
-        RefreshProductTableViewSingle(sendThisProductIndex);
+        RefreshProductsTableView();
     }
 
     public void loadSuppliers() {
@@ -1300,7 +1286,7 @@ public class Controller {
 
         tblSuppliers.getColumns().add(colSupplierId);
         tblSuppliers.getColumns().add(colSuppName);
-        RefreshSupplierTableViewSingle(sendThisSupplierIndex);
+        RefreshSuppliersTableView();
     }
 
 
@@ -1426,11 +1412,16 @@ public class Controller {
         tblProducts.getItems().add(py);
     }
 
+    /*
     private void RefreshSupplierTableViewSingle(int xS) {
         tblSuppliers.getItems().clear();
         Supplier sy = _supplierDb.getSupplier(xS);
-        tblSuppliers.getItems().add(sy);
-    }
+
+        for (Supplier sy: suppliers) {
+            tblSuppliers.getItems().add(sy);
+        }
+
+    }  */
 
 
     public void UpdateProduct(){
