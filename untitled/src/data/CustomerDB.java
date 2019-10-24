@@ -70,7 +70,7 @@ public class CustomerDB {
      * @param newCustomer to update
      * @return message of success/failure
      */
-    public String updateAgent(Customer oldCustomer, Customer newCustomer) {
+    public String updateCustomer(Customer oldCustomer, Customer newCustomer) {
 
         gson = new Gson();
         ArrayList<Customer> list = new ArrayList<>();

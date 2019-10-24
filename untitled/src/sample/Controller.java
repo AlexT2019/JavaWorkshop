@@ -1,9 +1,18 @@
 package sample;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import data.AgentDB;
+import data.BookingDB;
+import data.CustomerDB;
+import data.PackageDB;
+import data.dummy.BookingData;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
@@ -17,10 +26,31 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Agent;
 
+import model.Booking;
+import model.Customer;
+import model.Package;
+
 
 public class Controller {
 
 private ObservableList<Agent> agents = FXCollections.observableArrayList();
+    private ObservableList<Customer> customers = FXCollections.observableArrayList();
+    private ObservableList<Booking> bookings = FXCollections.observableArrayList();
+
+    private Customer selectedCustomer ; //contain the selected customer
+    private ObservableList<Package> packages = FXCollections.observableArrayList(); //the list of all packages
+    private Package selectedpackage ; //contain the selected package
+
+    private String REGEX_NAME="([a-zA-Z\\s])+";
+    private String REGEX_POSTAL="[A-Z][0-9][A-Z][ ][0-9][A-Z][0-9]" ;
+
+    private String REGEX_PHONE="[0-9]{10}";
+    private String REGEX_EMAIL="[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]+";// "[A-Z0-9+_.-]+@[A-Z0-9.-]+";
+    private String REGEX_NUMBER= "[0-9]+";
+    private String REGEX_USERNAME="[a-zA-Z0-9_-]+";
+    private String REGEX_PASSWORD="[a-zA-Z0-9@#$%^&+=]+";
+    private String ALERT_TITLE="Travel Expert Db Maintenance";
+
 
     @FXML // fx:id="tabAgents"
     private Tab tabAgents; // Value injected by FXMLLoader
@@ -72,6 +102,12 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     @FXML
     private TableColumn<String, Agent> colAgentId, colAgtFirstName, colAgtMiddleInitial, colAgtLastName, colAgtBusPhone, colAgtEmail, colAgtPosition, colAgencyId;
 
+    @FXML
+    private TableColumn<String, Customer> colCustomerId, colCustFirstName, colCustLastName, colCustAddress, colCustCity,
+            colCustProv,colCustPostal, colCustCountry, colCustHomePhone,colCustBusPhone,colCustAgentId ,colCustEmail,colCustusername,colCustpassword;
+
+    @FXML
+    private TableColumn<String, Booking> colBookingId,colBookingDate, colBookingNo,colTravelerCount, colTripTypeId,colPackageIdBooking;
     @FXML
     private TextField tfAgentId,  tfAgtFirstName, tfAgtMiddleInitial, tfAgtLastName, tfAgtBusPhone, tfAgtEmail, tfAgtPosition, tfAgencyId;
 
@@ -152,11 +188,10 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     @FXML
     private Button btnApply;
 
-    @FXML
-    private AnchorPane anpEmp1;
+
 
     @FXML
-    private TableView<?> tblBookings;
+    private TableView tblBookings;
 
     @FXML
     private TableColumn<?, ?> colAgentId1;
@@ -212,57 +247,65 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     @FXML
     private AnchorPane apControls1;
 
+
     @FXML
-    private TextField tfCustId;
+    private AnchorPane anpEmp1;
+
+
+    @FXML
+    private TableView tblCustomers;
+
+    @FXML
+    private TextField tfCustomerId;
 
     @FXML
     private TextField tfCustFirstName;
 
     @FXML
-    private TextField tfCustMiddleInitial;
-
-    @FXML
     private TextField tfCustLastName;
 
     @FXML
-    private TextField tfCustPhone;
+    private TextField tfCustAddress;
 
     @FXML
-    private Label lblID1;
+    private TextField tfCustCity;
 
     @FXML
-    private Label lbl11;
+    private TextField tfCustProv;
 
     @FXML
-    private Label lbl21;
+    private TextField tfCustPostal;
 
     @FXML
-    private Label lbl31;
+    private TextField tfCustCountry;
 
     @FXML
-    private Label lbl41;
+    private TextField tfCustHomePhone;
 
     @FXML
-    private Label lbl71;
-
-    @FXML
-    private Label lbl51;
+    private TextField tfCustBusPhone;
 
     @FXML
     private TextField tfCustEmail;
 
     @FXML
-    private TextField tfCustNotes;
+    private TextField tfCustUsername;
+
+    @FXML
+    //private PasswordField tfCustPassword = new PasswordField();
+    private TextField tfCustPassword;
+
+    @FXML
+    private Button btnEditCustomer;
+
+    @FXML
+    private Button btnAddCustomer;
 
     @FXML
     private Button btnUpdateCustomer;
 
     @FXML
-    private Button btnInsertCustomer;
-
-    @FXML
-    private Button btnSaveCustomer;
-
+    private Button btnCancelCustomer;
     @FXML
     private AnchorPane anpEmp11;
 
@@ -315,28 +358,11 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     private TextArea taPkgDesc;
 
     @FXML
-    private TableView<?> tblPackages;
+    private TableView  tblPackages;
 
     @FXML
-    private TableColumn<?, ?> colPackageId;
+    private TableColumn< String, Package> colPackageId, colPkgName,colPkgStartDate,colPkgEndDate,colPkgDescription, colPkgBasePrice , colPkgAgencyComm;
 
-    @FXML
-    private TableColumn<?, ?> colPkgName;
-
-    @FXML
-    private TableColumn<?, ?> colPkgStartDate;
-
-    @FXML
-    private TableColumn<?, ?> colPkgEndDate;
-
-    @FXML
-    private TableColumn<?, ?> colPkgDescription;
-
-    @FXML
-    private TableColumn<?, ?> colPkgBasePrice;
-
-    @FXML
-    private TableColumn<?, ?> colPkgAgencyComm;
 
     @FXML
     private AnchorPane anpEmp3;
@@ -426,6 +452,94 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     private Button btnExit;
 
 
+    @FXML
+    void OnMouseClickedCusttable(MouseEvent event) {
+        //look for the booking list of selected customer
+        //and build a new list in the booking list
+        buildBookingForCustomerSelected();
+    }
+    void buildBookingForCustomerSelected()
+    {
+        //get the new selected customer
+        selectedCustomer = (Customer) tblCustomers.getSelectionModel().getSelectedItem();
+        //get all the bookings of the customer selected and refresh the bookings table with the values of a list of bookings
+        ObservableList<Booking> bookingList= GetBookingsOfCustomer(selectedCustomer.getCustomerId());
+        if (bookingList!=null)
+            System.out.println(bookingList);
+        //build the booking table view
+        buildBookingstable(bookingList);
+
+
+    }
+    void createBookingTableColumns()
+    {
+        //table Column definition
+        colBookingId = new TableColumn<>("Id");
+        colBookingId.setCellValueFactory(new PropertyValueFactory<>("BookingId"));
+
+        colBookingDate = new TableColumn<>("Booking Date");
+        colBookingDate.setCellValueFactory(new PropertyValueFactory<>("BookingDate"));
+
+
+        colBookingNo = new TableColumn<>("Booking No");
+        colBookingNo.setCellValueFactory(new PropertyValueFactory<>("BookingNo"));
+
+        colTravelerCount = new TableColumn("Number of Travelers");
+        colTravelerCount.setCellValueFactory(new PropertyValueFactory("TravelerCount"));
+
+        colTripTypeId = new TableColumn<>("Trip Type");
+        colTripTypeId.setCellValueFactory(new PropertyValueFactory<>("TripTypeId"));
+
+        colPackageIdBooking= new TableColumn<>("PackageId");
+        colPackageIdBooking.setCellValueFactory(new PropertyValueFactory<>("PackageId"));
+
+
+        tblBookings.getColumns().add( colBookingId );
+        tblBookings.getColumns().add(colBookingDate);
+        tblBookings.getColumns().add(colBookingNo);
+        tblBookings.getColumns().add(colTravelerCount);
+        tblBookings.getColumns().add(colTripTypeId);
+        tblBookings.getColumns().add(colPackageIdBooking);
+
+
+    }
+    //build the booking list table from given list
+    void buildBookingstable(ObservableList<Booking> bookingList)
+    {
+
+        tblBookings.setItems(bookingList);
+        tblBookings.refresh();
+
+    }
+    //get all the booking of a given customer id
+    private ObservableList<Booking> GetBookingsOfCustomer(int CustId)
+    {
+        ObservableList <Booking> resultlist= FXCollections.observableArrayList() ;
+        //get all the bookinglist
+        BookingDB bookingDB = new BookingDB(new data.dummy.BookingData());
+        bookings = FXCollections.observableArrayList( bookingDB.getBookingList());
+
+        for(Booking booking:bookings)
+        {
+            if (booking.getCustomerId()==CustId)
+            {
+                resultlist.add(booking);
+            }
+        }
+
+        return resultlist;
+    }
+
+
+
+
+
+
+
+
+
+
+
     Agent _selectedAgent;
     int _selectedAgentIndex;
 
@@ -455,7 +569,114 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
 
 
 
+    @FXML
+    void OnActionBtnAddCust(ActionEvent event) {
 
+        //get the value for the new customer after validating all fields
+        String errorMessageTextFields =validateTextFieldsCustomer (); // contain the error message to display to the user
+        if (errorMessageTextFields.isEmpty()) {
+            Customer newCustomer = getNewCustomerFromTextField();
+            //disable edit and textfield and save data to db
+            btnEditCustomer.setDisable(true);
+            setDisableTextFieldElementCustomer(true);
+            //save the new value entered by user into the db
+            try {
+
+                CustomerDB customerdb = new CustomerDB(new data.dummy.CustomerData());
+                String message = customerdb.insertCustomer(   newCustomer);
+                //add the new customer to my list of customers
+                customers.add(newCustomer);
+                //refresh table with new value
+                tblCustomers.refresh();
+                btnUpdateCustomer.setDisable(true);
+                btnEditCustomer.setDisable(false);
+                System.out.println("Insert:" + message);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+
+            //substring the last ","
+            errorMessageTextFields= errorMessageTextFields.substring(0,errorMessageTextFields.length()-2);
+
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Check the following fields: " + errorMessageTextFields , ButtonType.OK);
+            alert.setTitle(ALERT_TITLE);
+            alert.setHeaderText("");
+            alert.show();
+
+        }
+
+
+    }
+
+    @FXML
+    void OnActionBtnCancelCust(ActionEvent event) {
+        clearCustumerTextField();
+        setDisableTextFieldElementCustomer(false);
+    }
+
+    public void OnMouseClickedBooktable(MouseEvent mouseEvent) {
+
+    }
+
+    @FXML
+    void OnActionBtnUpdateCust(ActionEvent event) {
+
+        //call update with new customer from field
+        Customer oldCustomer=selectedCustomer;
+
+        //get the value for the new customer after validating all fields
+        String errorMessageTextFields =validateTextFieldsCustomer (); // contain the error message to display to the user
+        if (errorMessageTextFields.isEmpty()) {
+            Customer newCustomer = getNewCustomerFromTextField();
+            //disable edit and textfield and save data to db
+            btnEditCustomer.setDisable(true);
+            setDisableTextFieldElementCustomer(true);
+            //save the new value entered by user into the db
+            try {
+
+                CustomerDB customerdb = new CustomerDB(new data.dummy.CustomerData());
+                String message = customerdb.updateCustomer(  oldCustomer, newCustomer);
+
+                oldCustomer.copy(newCustomer);
+                //refresh table with new value
+                tblCustomers.refresh();
+                btnUpdateCustomer.setDisable(true);
+                btnEditCustomer.setDisable(false);
+                System.out.println("Update:" + message);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else
+        {
+
+            //substring the last ","
+            errorMessageTextFields= errorMessageTextFields.substring(0,errorMessageTextFields.length()-2);
+
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Check the following fields: " + errorMessageTextFields , ButtonType.OK);
+            alert.setTitle(ALERT_TITLE);
+            alert.setHeaderText("");
+            alert.show();
+
+        }
+
+    }
+
+    @FXML
+    void OnActionClickBtnEditCust(ActionEvent event) {
+        loadCustomer(selectedCustomer);
+        //set unable update btn
+        btnUpdate.setDisable(false);
+        setDisableTextFieldElementCustomer(false);
+
+    }
 
     @FXML
     void initialize() {
@@ -521,23 +742,15 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         assert colAgncyPhone1 != null : "fx:id=\"colAgncyPhone1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert colAgncyFax1 != null : "fx:id=\"colAgncyFax1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert apControls1 != null : "fx:id=\"apControls1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfCustId != null : "fx:id=\"tfCustId\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+
         assert tfCustFirstName != null : "fx:id=\"tfCustFirstName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfCustMiddleInitial != null : "fx:id=\"tfCustMiddleInitial\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+
         assert tfCustLastName != null : "fx:id=\"tfCustLastName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfCustPhone != null : "fx:id=\"tfCustPhone\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lblID1 != null : "fx:id=\"lblID1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl11 != null : "fx:id=\"lbl11\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl21 != null : "fx:id=\"lbl21\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl31 != null : "fx:id=\"lbl31\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl41 != null : "fx:id=\"lbl41\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl71 != null : "fx:id=\"lbl71\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl51 != null : "fx:id=\"lbl51\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+
         assert tfCustEmail != null : "fx:id=\"tfCustEmail\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfCustNotes != null : "fx:id=\"tfCustNotes\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+
         assert btnUpdateCustomer != null : "fx:id=\"btnUpdateCustomer\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnInsertCustomer != null : "fx:id=\"btnInsertCustomer\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnSaveCustomer != null : "fx:id=\"btnSaveCustomer\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+
         assert tabPackages != null : "fx:id=\"tabPackages\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert anpEmp11 != null : "fx:id=\"anpEmp11\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert lbl311 != null : "fx:id=\"lbl311\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
@@ -601,7 +814,18 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
      //   agents = FXCollections.observableArrayList( agentDb.getAgentList());
      //   tblAgents.setItems(agents);
 
-loadAgents();
+        loadAgents();
+        //load all the customers in the db
+        loadCustomers();
+        //load just the header of the booking table
+        createBookingTableColumns();
+        //load the booking of the selected customer -the first customer
+        buildBookingForCustomerSelected( );
+
+        //load all the packages in the db
+        //   loadPackages();
+
+
 
         tblAgents.selectionModelProperty().addListener((Observable observable) -> {
                     int index = tblAgents.getSelectionModel().getSelectedIndex();
@@ -616,6 +840,241 @@ loadAgents();
 
                 }
         );
+
+    }
+    //load all the packages into the packages table
+    void loadPackages()
+    {
+        tblPackages.refresh();
+        PackageDB packageDB = new PackageDB(new data.dummy.PackageData());
+        packages = null;//FXCollections.observableArrayList( packageDB.getPackageList());
+
+        //define the table column
+        colPackageId = new TableColumn<>("Id");
+        colPackageId.setCellValueFactory(new PropertyValueFactory<>("PackageId"));
+
+        colPkgName = new TableColumn<>("Package Name");
+        colPkgName.setCellValueFactory(new PropertyValueFactory<>("PkgName"));
+
+
+        colPkgStartDate = new TableColumn<>("Start Date");
+        colPkgStartDate.setCellValueFactory(new PropertyValueFactory<>("PkgStartDate"));
+
+        colPkgEndDate = new TableColumn<>("End Date");
+        colPkgEndDate.setCellValueFactory(new PropertyValueFactory<>("PkgEndDate"));
+
+        colPkgDescription = new TableColumn<>("Description");
+        colPkgDescription.setCellValueFactory(new PropertyValueFactory<>("PkgDescription"));
+
+        colPkgBasePrice = new TableColumn<>("Base price");
+        colPkgBasePrice.setCellValueFactory(new PropertyValueFactory<>("PkgBasePrice"));
+
+        colPkgAgencyComm= new TableColumn<>("Commission");
+        colPkgAgencyComm.setCellValueFactory(new PropertyValueFactory<>("PkgAgencyCommission"));
+
+
+
+        tblPackages.getColumns().add(colPackageId);
+        tblPackages.getColumns().add(colPkgName);
+        tblPackages.getColumns().add(colPkgStartDate);
+        tblPackages.getColumns().add(colPkgEndDate);
+        tblPackages.getColumns().add(colPkgDescription);
+        tblPackages.getColumns().add(colPkgBasePrice);
+        tblPackages.getColumns().add(colPkgAgencyComm);
+
+       /* tblPackages.setItems(packages);
+
+
+        if (packages.size() != 0)
+            selectedpackage=packages.get(0);
+        tblPackages.getSelectionModel().select(0);
+
+*/
+
+    }
+
+
+
+    //validate all the textfield return false if we find errors
+    public String validateTextFieldsCustomer()
+    {
+        //this will verify all the user entry and return result in valid
+        Validate valid =new Validate();
+        String errorMessage=
+                valid.validateTextField(tfCustFirstName.getText(),REGEX_NAME,2,25,"First Name") +
+                        valid.validateTextField(tfCustLastName.getText(),REGEX_NAME,2,25,"Last Name")+
+                        valid.validateTextFieldNoRegexp(tfCustAddress.getText(),6,75,"Address")+
+                        valid.validateTextField(tfCustCity.getText(),REGEX_NAME,2,25,"City")+
+                        valid.validateTextField(tfCustProv.getText(),REGEX_NAME,2,25,"Province")+
+                        valid.validateTextField(tfCustPostal.getText(),REGEX_POSTAL,7,7,"Postal Code")+
+                        valid.validateTextFieldNullValue(tfCustCountry.getText(),REGEX_NAME,25,"Country")+
+                        valid.validateTextFieldNullValue(tfCustHomePhone.getText(),REGEX_PHONE,10,"Home Phone")+
+                        valid.validateTextField(tfCustBusPhone.getText(),REGEX_PHONE,10,10,"Business Phone")+
+                        valid.validateTextField(tfCustEmail.getText(),REGEX_EMAIL,6,50,"Email")+
+                        valid.validateTextFieldNullValue(tfAgentId.getText(),REGEX_NUMBER,11,"Agent Id")+
+                        valid.validateTextFieldNullValue(tfCustUsername.getText(),REGEX_USERNAME,20,"Username")+
+                        valid.validateTextFieldNullValue(tfCustPassword.getText(),REGEX_PASSWORD,20,"Password");
+
+        return errorMessage;
+    }
+    //set disable to all textfield with value in status
+    public void setDisableTextFieldElementCustomer( boolean status)
+    {
+        tfCustomerId.setDisable(true);
+        tfCustFirstName.setDisable(status);
+        tfCustLastName.setDisable(status);
+        tfCustAddress.setDisable(status);
+        tfCustBusPhone.setDisable(status);
+        tfCustHomePhone.setDisable(status);
+        tfCustCity.setDisable(status);
+        tfCustProv.setDisable(status);
+        tfCustEmail.setDisable(status);
+        tfCustPostal.setDisable(status);
+        tfCustCountry.setDisable(status);
+        tfAgentId.setDisable(status);
+        tfCustUsername.setDisable(status);
+        tfCustPassword.setDisable(status);
+
+    }
+
+    //get new customer from textfield after checking data entered by the user
+    public Customer getNewCustomerFromTextField()
+    {
+        Customer newCustomer = new
+                Customer( Integer.parseInt( tfCustomerId.getText().toString() ), tfCustFirstName.getText(), tfCustLastName.getText(), tfCustAddress.getText(),
+                tfCustCity.getText(), tfCustProv.getText(), tfCustPostal.getText(), tfCustCountry.getText()
+                ,tfCustHomePhone.getText(), tfCustBusPhone.getText(), tfCustEmail.getText(),Integer.parseInt( tfAgentId.getText()), tfCustUsername.getText(),
+                tfCustPassword.getText());
+
+        return newCustomer;
+    }
+
+    //load customer field with value in cust
+    public void loadCustomer(Customer cust)
+    {
+        clearCustumerTextField();
+        tfCustomerId.setText(cust.getCustomerId()+"");
+        tfCustomerId.setDisable(true);
+        tfCustFirstName.setText(cust.getCustFirstName().trim());
+        tfCustLastName.setText(cust.getCustLastName().trim());
+        tfCustAddress.setText(cust.getCustAddress().trim());
+        tfCustBusPhone.setText(cust.getCustBusPhone().trim());
+        tfCustHomePhone.setText(cust.getCustHomePhone().trim());
+        tfCustCity.setText(cust.getCustCity().trim());
+        tfCustProv.setText(cust.getCustProv().trim());
+        tfCustEmail.setText(cust.getCustEmail().trim());
+        tfCustPostal.setText(cust.getCustPostal().trim());
+        tfCustCountry.setText(cust.getCustCountry().trim());
+        tfAgentId.setText(cust.getAgentId()+"");
+        tfCustUsername.setText(cust.getCustusername().trim());
+        tfCustPassword.setText(cust.getCustpassword().trim());
+        tfCustFirstName.requestFocus();
+
+    }
+
+    public void clearCustumerTextField()
+    {
+        tfCustomerId.clear();
+        tfCustFirstName.clear();
+        tfCustLastName.clear();
+        tfCustAddress.clear();
+        tfCustBusPhone.clear();
+        tfCustHomePhone.clear();
+        tfCustCity.clear();
+        tfCustProv.clear();
+        tfCustEmail.clear();
+        tfCustPostal.clear();
+        tfCustCountry.clear();
+        tfAgentId.clear();
+        tfCustUsername.clear();
+        tfCustPassword.clear();
+
+    }
+
+
+    public void loadCustomers()
+    {
+
+        tblCustomers.refresh();
+        CustomerDB customerDB = new CustomerDB(new data.dummy.CustomerData());
+        customers = FXCollections.observableArrayList( customerDB.getCustomerList());
+
+        //properties access method
+        colCustomerId = new TableColumn<>("Id");
+        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("CustomerId"));
+
+        colCustFirstName = new TableColumn<>("First Name");
+        colCustFirstName.setCellValueFactory(new PropertyValueFactory<>("CustFirstName"));
+
+
+        colCustLastName = new TableColumn<>("Last Name");
+        colCustLastName.setCellValueFactory(new PropertyValueFactory<>("CustLastName"));
+
+        colCustAddress = new TableColumn<>("Address");
+        colCustAddress.setCellValueFactory(new PropertyValueFactory<>("CustAddress"));
+
+        colCustCity = new TableColumn<>("City");
+        colCustCity.setCellValueFactory(new PropertyValueFactory<>("CustCity"));
+
+        colCustProv = new TableColumn<>("Province");
+        colCustProv.setCellValueFactory(new PropertyValueFactory<>("CustProv"));
+
+        colCustPostal= new TableColumn<>("Postal Code");
+        colCustPostal.setCellValueFactory(new PropertyValueFactory<>("CustPostal"));
+
+        colCustCountry= new TableColumn<>("Country");
+        colCustCountry.setCellValueFactory(new PropertyValueFactory<>("CustCountry"));
+
+        colCustHomePhone= new TableColumn<>("Home Phone");
+        colCustHomePhone.setCellValueFactory(new PropertyValueFactory<>("CustHomePhone"));
+
+        colCustBusPhone= new TableColumn<>("Business Phone");
+        colCustBusPhone.setCellValueFactory(new PropertyValueFactory<>("CustBusPhone"));
+
+        colCustEmail= new TableColumn<>("Email");
+        colCustEmail.setCellValueFactory(new PropertyValueFactory<>("CustEmail"));
+
+        colCustAgentId= new TableColumn<>("Agent Id");
+        colCustAgentId.setCellValueFactory(new PropertyValueFactory<>("AgentId"));
+
+        colCustusername= new TableColumn<>("Username");
+        colCustusername.setCellValueFactory(new PropertyValueFactory<>("Custusername"));
+
+        colCustpassword= new TableColumn<>("Password");
+        colCustpassword.setCellValueFactory(new PropertyValueFactory<>("Custpassword"));
+
+
+
+        tblCustomers.getColumns().add(colCustomerId);
+        tblCustomers.getColumns().add(colCustFirstName);
+        tblCustomers.getColumns().add(colCustLastName);
+        tblCustomers.getColumns().add(colCustAddress);
+        tblCustomers.getColumns().add(colCustCity);
+        tblCustomers.getColumns().add(colCustProv);
+        tblCustomers.getColumns().add(colCustPostal);
+        tblCustomers.getColumns().add(colCustCountry);
+        tblCustomers.getColumns().add(colCustHomePhone);
+        tblCustomers.getColumns().add(colCustBusPhone);
+        tblCustomers.getColumns().add(colCustEmail);
+        tblCustomers.getColumns().add(colCustAgentId);
+        tblCustomers.getColumns().add(colCustusername);
+        tblCustomers.getColumns().add(colCustpassword);
+
+
+        for (Customer a: customers ) {
+            tblCustomers.getItems().add(a);
+        }
+
+        if (customers.size() != 0)
+            selectedCustomer=customers.get(0);
+        tblCustomers.getSelectionModel().select(0);
+
+        //set disable the update btn  , until we click on edit then it will become enable again
+        btnUpdate.setDisable(true);
+        clearCustumerTextField();
+        setDisableTextFieldElementCustomer(false);
+
+
 
     }
 
@@ -694,7 +1153,6 @@ tabReview.setDisable(false);
 
 
     }
-
 
 
 
