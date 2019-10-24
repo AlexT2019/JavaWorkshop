@@ -1,8 +1,7 @@
 package sample;
 
-import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
-import java.lang.annotation.Target;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -10,27 +9,21 @@ import data.AgencyDB;
 import data.AgentDB;
 import data.ProductDB;
 import data.SupplierDB;
-import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
 import model.Agency;
 import model.Agent;
 import model.Product;
@@ -144,8 +137,6 @@ public class Controller {
     private TableColumn<String, Agency> colAgncyId1, colAgncyAddress, colAgncyCity,colAgncyProv, colAgncyPostal, colAgncyCountry,
             colAgncyPhone, colAgncyFax;
 
-    @FXML
-    private ImageView imageViewAgentPhoto, imageViewAgentPhoto1;
 
     @FXML
     private TableColumn<String, Product> colProductId, colProdName;
@@ -427,8 +418,7 @@ public class Controller {
         assert tabAgents != null : "fx:id=\"tabAgents\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert anpEmp != null : "fx:id=\"anpEmp\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert tblAgents != null : "fx:id=\"tblAgents\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert imageViewAgentPhoto != null : "fx:id=\"imageViewAgentPhoto\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tblAgencies != null : "fx:id=\"tblAgencies\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+          assert tblAgencies != null : "fx:id=\"tblAgencies\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert apControls != null : "fx:id=\"apControls\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert tfAgentId != null : "fx:id=\"tfAgentId\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert tfAgtFirstName != null : "fx:id=\"tfAgtFirstName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
@@ -512,7 +502,6 @@ public class Controller {
         assert tabSandP != null : "fx:id=\"tabSandP\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert anpEmp2 != null : "fx:id=\"anpEmp2\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert tblSuppliers != null : "fx:id=\"tblSuppliers\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert imageViewAgentPhoto1 != null : "fx:id=\"imageViewAgentPhoto1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert tblProducts != null : "fx:id=\"tblProducts\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert btnAddProd != null : "fx:id=\"btnAddProd\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert btnUpdateProd != null : "fx:id=\"btnUpdateProd\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
