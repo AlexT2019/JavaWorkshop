@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
+
+<?import javafx.geometry.Insets?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -17,8 +21,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <GridPane alignment="center" hgap="10" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
@@ -122,17 +128,175 @@
                            <content>
                               <AnchorPane fx:id="anpEmp2" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="1259.0">
                                  <children>
+
                                     <TableView fx:id="tblSuppliers" layoutX="630.0" layoutY="80.0" prefHeight="339.0" prefWidth="602.0" />
                                     <Label layoutX="630.0" layoutY="41.0" text="All those who supply us with all our goodies">
+
+                                    <TableView fx:id="tblCustomers" layoutX="334.0" layoutY="58.0" onMouseClicked="#OnMouseClickedCusttable" prefHeight="200.0" prefWidth="904.0" />
+                                    <TableView fx:id="tblBookings" layoutX="334.0" layoutY="326.0" onMouseClicked="#OnMouseClickedBooktable" prefHeight="214.0" prefWidth="901.0" />
+                                    <VBox layoutX="5.0" layoutY="15.0" prefHeight="383.0" prefWidth="103.0">
+                                       <children>
+                                          <Label prefHeight="20.0" prefWidth="84.0" text="Customer Id:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="17.0" prefWidth="88.0" text="First name:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="17.0" prefWidth="88.0" text="Last name:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="17.0" prefWidth="88.0" text="Address:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="17.0" prefWidth="88.0" text="City:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="17.0" prefWidth="88.0" text="Prov:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="17.0" prefWidth="88.0" text="Postal Code:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="17.0" prefWidth="88.0" text="Country:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="17.0" prefWidth="88.0" text="Home Phone:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="17.0" prefWidth="88.0" text="Bus Phone:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="17.0" prefWidth="88.0" text="Email:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="17.0" prefWidth="88.0" text="Agent Id:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="17.0" prefWidth="88.0" text="Username:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label prefHeight="17.0" prefWidth="88.0" text="Password:">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="109.0" layoutY="32.0" prefHeight="342.0" prefWidth="218.0">
+                                       <children>
+                                          <TextField fx:id="tfCustomerId" />
+                                          <TextField fx:id="tfCustFirstName">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="tfCustLastName">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="tfCustAddress">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="tfCustCity">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="tfCustProv">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="tfCustPostal">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="tfCustCountry" prefHeight="25.0" prefWidth="576.0">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="tfCustHomePhone">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="tfCustBusPhone">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="tfCustEmail" />
+                                          <TextField fx:id="tfAgentId">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="tfCustUsername">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="tfCustPassword">
+                                             <VBox.margin>
+                                                <Insets top="2.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <HBox layoutX="17.0" layoutY="414.0" prefHeight="35.0" prefWidth="271.0">
+                                       <children>
+                                          <Button fx:id="btnEditCustomer" mnemonicParsing="false" onAction="#OnActionClickBtnEditCust" text="Edit" />
+                                          <Button fx:id="btnAddCustomer" mnemonicParsing="false" onAction="#OnActionBtnAddCust" text="Add" />
+                                          <Button fx:id="btnUpdateCustomer" mnemonicParsing="false" onAction="#OnActionBtnUpdateCust" text="Update" />
+                                          <Button fx:id="btnCancelCustomer" mnemonicParsing="false" onAction="#OnActionBtnCancelCust" text="Cancel" />
+                                       </children>
+                                    </HBox>
+                                    <Label layoutX="334.0" layoutY="33.0" prefHeight="17.0" prefWidth="78.0" text="Customers">
+
                                        <font>
-                                          <Font name="System Bold" size="18.0" />
+                                          <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
+
                                     <ImageView fx:id="imageViewAgentPhoto1" fitHeight="204.0" fitWidth="200.0" layoutX="466.0" layoutY="454.0" pickOnBounds="true" preserveRatio="true" />
                                     <TableView fx:id="tblProducts" layoutX="27.0" layoutY="79.0" prefHeight="341.0" prefWidth="564.0" />
                                     <Label layoutX="27.0" layoutY="41.0" text="Products">
+
+                                    <Label layoutX="334.0" layoutY="297.0" prefHeight="17.0" prefWidth="78.0" text="Bookings">
+
                                        <font>
-                                          <Font name="System Bold" size="18.0" />
+                                          <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
                                     <AnchorPane layoutX="28.0" layoutY="443.0" prefHeight="200.0" prefWidth="1212.0">
@@ -164,7 +328,12 @@
                                     <AnchorPane layoutX="19.0" layoutY="399.0" prefHeight="264.0" prefWidth="987.0">
                                        <children>
                                           <Label fx:id="lbl311" layoutX="676.0" layoutY="-42.0" />
-                                          <GridPane layoutX="428.0" layoutY="28.0" prefHeight="126.0" prefWidth="556.0">
+                                          <Button fx:id="btnUpdatePackage" layoutX="14.0" layoutY="79.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="117.0" text="Update Package" wrapText="true" />
+                                          <Button fx:id="btnAddPackage" layoutX="15.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Add Package" />
+                                          <Button fx:id="btnClearPackage" layoutX="274.0" layoutY="154.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="131.0" text="Clear" />
+                                          <Button fx:id="btnApplyPackageChanges" layoutX="872.0" layoutY="165.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="101.0" text="Apply" />
+                                          <Button fx:id="btnDeletePkg" layoutX="14.0" layoutY="118.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="117.0" text="Delete Package" wrapText="true" />
+                                          <GridPane layoutX="144.0" layoutY="28.0" prefHeight="115.0" prefWidth="261.0">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="83.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="400.0" />
@@ -176,6 +345,22 @@
                                           </GridPane>
                                        </children>
                                     </AnchorPane>
+                                    <TableView fx:id="tblPackages" layoutX="19.0" layoutY="41.0" prefHeight="339.0" prefWidth="989.0">
+                                       <columns>
+                                          <TableColumn fx:id="colPackageId" editable="false" prefWidth="40.0" text="PkgID" />
+                                          <TableColumn fx:id="colPkgName" prefWidth="178.0" text="Package Name" />
+                                          <TableColumn fx:id="colPkgStartDate" minWidth="0.0" prefWidth="89.0" text="Start Date" />
+                                          <TableColumn fx:id="colPkgEndDate" prefWidth="99.0" text="End Date" />
+                                          <TableColumn fx:id="colPkgDescription" prefWidth="420.0" text="Description" />
+                                          <TableColumn fx:id="colPkgBasePrice" prefWidth="65.0" text="Base Price" />
+                                          <TableColumn fx:id="colPkgAgencyComm" editable="false" prefWidth="82.0" text="Commission" />
+                                       </columns>
+                                    </TableView>
+                                    <Label layoutX="19.0" layoutY="14.0" text="Packages">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
                            </content>

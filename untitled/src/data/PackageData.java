@@ -2,9 +2,9 @@ package data;
 
 public interface PackageData {
 
-//    String getPackage(String Id);
+    String getPackage(int packageId);
     String getAllPackages();
-//    String insertPackage(String jsonData);
+    String insertPackage(String jsonData);
     String updatePackage(String jsonData);
-//    String deletePackage(int Id);
+    String deletePackage(int packageId);
 }
