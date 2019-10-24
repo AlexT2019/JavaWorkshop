@@ -613,7 +613,7 @@ public class Controller {
                 //add the new customer to my list of customers
                 customers.add(newCustomer);
                 //refresh table with new value
-                tblCustomers.refresh();
+                loadCustomers();
                 btnUpdateCustomer.setDisable(true);
                 btnEditCustomer.setDisable(false);
                 System.out.println("Insert:" + message);
