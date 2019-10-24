@@ -1282,7 +1282,7 @@ public class Controller {
         colSupplierId.setCellValueFactory(new PropertyValueFactory<>("supplierId"));
 
         colSuppName= new TableColumn<>("Supplier Name");
-        colSuppName.setCellValueFactory(new PropertyValueFactory<>("suppName"));
+        colSuppName.setCellValueFactory(new PropertyValueFactory<>("supName"));
 
         tblSuppliers.getColumns().add(colSupplierId);
         tblSuppliers.getColumns().add(colSuppName);
