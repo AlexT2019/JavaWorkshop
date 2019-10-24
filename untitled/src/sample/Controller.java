@@ -352,7 +352,8 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         CheckLoginStartPage();
 
     }
-
+    final ImageView img1= new ImageView();
+    final Image image2 = new Image(Main.class.getResourceAsStream("Fired.gif"));
 
     @FXML
    public void onActionBtnLoginClick(ActionEvent event) {
@@ -379,13 +380,15 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         DeleteSelectedAgent();
         ClearAgentInputData();
         refreshAgentTableView();
-       // Image  img = new Image("Fired.gif");
+
 
         Alert a = new Alert(Alert.AlertType.INFORMATION,"you are fired!!");
            a.show();
 
-      //  imgFired.setImage(img);
-       // imgFired.getImage();
+imgFired.toFront();
+
+
+
 
     }
 
@@ -535,11 +538,12 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         loadProducts();
         loadSuppliers();
 
-        DisableAll();
+
+        DisableAll(); //disable all tabs until valid credintials have been provided
         CheckLoginStartPage();
 
 
-
+        //When a user clicks on an agent in a table, this will populate the individual agent
         tblAgents.setOnMouseClicked((MouseEvent eventAgt) -> {
                     if (eventAgt.getButton().equals(MouseButton.PRIMARY)) {
                         int indexAgt = tblAgents.getSelectionModel().getSelectedIndex();
@@ -564,6 +568,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
                 }
         );
 
+        //code to add when an agency is selected
         tblAgencies.setOnMouseClicked((MouseEvent event) -> {
             if (event.getButton().equals(MouseButton.PRIMARY)) {
            sendThisIndex =  Integer.valueOf(_selectedAgent.getAgencyId());
@@ -675,7 +680,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
 
 
     public void loadAgents() {
-
+//loads all agents into the table
         _agentDb = new AgentDB(new data.dummy.AgentData());
         agents = FXCollections.observableArrayList( _agentDb.getAgentList());
 
@@ -718,7 +723,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     }
 
     public void loadProducts() {
-
+        //loads all products
         _productDb = new ProductDB(new data.dummy.ProductData());
         products = FXCollections.observableArrayList(_productDb.getProductList());
 
@@ -734,6 +739,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     }
 
     public void loadSuppliers() {
+      //loads all suppliers
        _supplierDb = new SupplierDB(new data.dummy.SupplierData());
        suppliers = FXCollections.observableArrayList(_supplierDb.getSupplierList());
 
