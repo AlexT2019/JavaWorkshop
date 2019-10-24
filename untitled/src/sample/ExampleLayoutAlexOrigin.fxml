@@ -448,6 +448,7 @@
                                           <Image url="@img/Mars1.jpg" />
                                        </image>
                                     </ImageView>
+                                    <Button fx:id="btnExit1" layoutX="479.0" layoutY="626.0" mnemonicParsing="false" onAction="#onActionBtnExit1" prefHeight="44.0" prefWidth="72.0" text="Exit" />
                                  </children>
                               </AnchorPane>
                           </content>

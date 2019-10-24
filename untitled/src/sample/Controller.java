@@ -29,6 +29,7 @@ import data.CustomerDB;
 import data.PackageDB;
 
 
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -305,6 +306,11 @@ public class Controller {
     @FXML
     private Button btnUpdateCustomer;
 
+
+    @FXML
+    private Button btnExit1;
+
+
     @FXML
     private Button btnCancelCustomer;
 
@@ -385,6 +391,12 @@ public class Controller {
     @FXML
     void btnUpdateSupplierOnMouseClick(MouseEvent event) {
         InsertSupplier(); }
+
+    @FXML
+    void onActionBtnExit1(ActionEvent event) {
+        Platform.exit();
+    }
+
 
 
     Agent _selectedAgent;
@@ -818,6 +830,7 @@ public class Controller {
         assert tfReview != null : "fx:id=\"tfReview\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
         assert btnClearReview != null : "fx:id=\"btnClearReview\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
         assert tfReview != null : "fx:id=\"tfReview\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnExit1 != null : "fx:id=\"btnExit1\" was not injected: check your FXML file." ;
 
         loadAgents();
         LoadAgencies();
@@ -1498,11 +1511,7 @@ public class Controller {
         String message = _agentDb.deleteAgent(agentId);
         refreshAgentTableView();
         System.out.println("Agent# " + agentId + " was deleted." + message);
-
-
-
     }
-
 
 
     public void InsertAgent(){
