@@ -35,7 +35,7 @@ import model.Agency;
 import model.Agent;
 import model.Product;
 import model.Supplier;
-
+import javafx.scene.web.WebView;
 
 
 public class Controller {
@@ -121,6 +121,9 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
 
     @FXML // fx:id="anpEmp2"
     private AnchorPane anpEmp2; // Value injected by FXMLLoader
+
+    @FXML
+    private WebView wbFired;
 
     @FXML
     private ResourceBundle resources;
@@ -384,13 +387,6 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
 
         Alert a = new Alert(Alert.AlertType.INFORMATION,"you are fired!!");
            a.show();
-
-           ImageView imgFired = new ImageView("/Fired.gif");
-
-
-imgFired.getClass().getResourceAsStream("/Fired.gif");
-
-
 
 
     }
