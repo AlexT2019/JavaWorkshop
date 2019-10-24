@@ -153,6 +153,16 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
     @FXML
     private TableColumn<String, Supplier> colSupplierId, colSuppName;
 
+    @FXML // fx:id="tfReview"
+    private TextArea tfReview; // Value injected by FXMLLoader
+
+
+
+
+
+    @FXML // fx:id="btnClearReview"
+    private Button btnClearReview; // Value injected by FXMLLoader
+
     /*
     @FXML
     private TableView<?> tblBookings;
@@ -381,6 +391,7 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
 
     @FXML
     void onInsertAgentBtnClick(MouseEvent event) {
+
         InsertAgent();
     }
 
@@ -395,6 +406,13 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
       tfAgtMiddleInitial.clear();
       tfAgencyId.clear();
     }
+
+    @FXML
+    void onBtnClearReviewClicked(MouseEvent event) {
+        tfReview.clear();
+        tfReview.setText("Yeh. Lets re-write this review and send us a better mark! ");
+    }
+
 
     @FXML
     void initialize() {
@@ -508,6 +526,10 @@ private ObservableList<Supplier> suppliers = FXCollections.observableArrayList()
         assert tfSupplierName != null : "fx:id=\"tfSupplierName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert imgFired != null : "fx:id=\"imgFired\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
         assert pane != null : "fx:id=\"pane\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+        assert tfReview != null : "fx:id=\"tfReview\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+        assert btnClearReview != null : "fx:id=\"btnClearReview\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+        assert tfReview != null : "fx:id=\"tfReview\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+
         loadAgents();
         LoadAgencies();
         loadProducts();
