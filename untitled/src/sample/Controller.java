@@ -474,20 +474,13 @@ public class Controller {
         ClearAgentInputData();
         refreshAgentTableView();
 
-
         Agent _selectedAgent;
         int _selectedAgentIndex;
-
-
 
         Alert a = new Alert(Alert.AlertType.INFORMATION,"you are fired!!");
         a.show();
 
         imgFired.toFront();
-
-
-
-
 
 }
         @FXML
@@ -871,6 +864,7 @@ public class Controller {
                         sendThisIndex = Integer.valueOf(_selectedAgent.getAgencyId());
                         //  LoadAgency(sendThisIndex);
                         RefreshAgencyTableViewSingle(sendThisIndex);
+                        imgFired.toBack();
                     }
                 }
         );
