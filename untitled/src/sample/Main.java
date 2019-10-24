@@ -16,8 +16,14 @@ public class Main extends Application {
        Parent root = FXMLLoader.load(getClass().getResource("ExampleLayoutAlexOrigin.fxml"));
         primaryStage.setTitle("Hello Agent");
         primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
+      //  primaryStage.setResizable(false);
         primaryStage.show();
+
+        primaryStage.setMinHeight(600);
+        primaryStage.setMinWidth(800);
+        primaryStage.setMaxHeight(720);
+        primaryStage.setMaxWidth(1800);
+
 
      //   primaryStage.setMinWidth(primaryStage.getWidth());
      //   primaryStage.setMinHeight(primaryStage.getHeight());
