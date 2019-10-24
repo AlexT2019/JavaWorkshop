@@ -32,13 +32,13 @@
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="797.0" prefWidth="1272.0" GridPane.columnIndex="1">
          <children>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <TabPane prefHeight="724.0" prefWidth="1259.0" tabClosingPolicy="UNAVAILABLE">
-                    <tabs>
-                      <Tab text="Start">
-                        <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="442.0" prefWidth="1259.0">
+                     <tabs>
+                        <Tab text="Start">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="442.0" prefWidth="1259.0">
                                  <children>
                                     <ImageView fitHeight="381.0" fitWidth="567.0" layoutX="279.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -57,8 +57,8 @@
                                     </AnchorPane>
                                  </children>
                               </AnchorPane>
-                        </content>
-                      </Tab>
+                           </content>
+                        </Tab>
                         <Tab fx:id="tabAgents" text="Agents">
                            <content>
 
@@ -66,10 +66,13 @@
 
                               <AnchorPane fx:id="anpEmp" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="1259.0">
                                  <children>
-                                    <ImageView fx:id="imgFired" fitHeight="299.0" fitWidth="235.0" layoutX="1024.0" layoutY="105.0" pickOnBounds="true" smooth="false">
+                                    <ImageView fx:id="imgFired" layoutX="975.0" layoutY="106.0" opacity="0.62" pickOnBounds="true" preserveRatio="true">
                                        <viewport>
                                           <Rectangle2D />
-                                       </viewport></ImageView>
+                                       </viewport>
+                                       <image>
+                                          <Image url="@Fired.gif" />
+                                       </image></ImageView>
                                     <Label layoutX="263.0" layoutY="14.0" text="Our Glorious Agents">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
@@ -104,7 +107,7 @@
                                           <Button fx:id="btnClearAgent" layoutX="18.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#onClearAgentBtnClick" prefHeight="29.0" prefWidth="54.0" text="Clear" />
                                        </children>
                                     </AnchorPane>
-                                    <Button fx:id="btnDeleteAgent" layoutX="1025.0" layoutY="76.0" mnemonicParsing="false" onMouseClicked="#onDeleteAgentBtnClick" prefHeight="29.0" prefWidth="233.0" text="Delete Agent" wrapText="true" />
+                                    <Button fx:id="btnDeleteAgent" layoutX="1025.0" layoutY="76.0" mnemonicParsing="false" onMouseClicked="#onDeleteAgentBtnClick" prefHeight="275.0" prefWidth="233.0" text="Delete Agent" wrapText="true" />
                                     <TableView fx:id="tblAgents" layoutX="228.0" layoutY="50.0" prefHeight="352.0" prefWidth="790.0" />
                                  </children>
                               </AnchorPane>
@@ -162,14 +165,14 @@
                                        <children>
                                           <Label fx:id="lbl311" layoutX="676.0" layoutY="-42.0" />
                                           <GridPane layoutX="428.0" layoutY="28.0" prefHeight="126.0" prefWidth="556.0">
-                                            <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="83.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="400.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                              <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                                              <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="83.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="400.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
                                           </GridPane>
                                        </children>
                                     </AnchorPane>
@@ -248,8 +251,8 @@
                            </content>
                         </Tab>
                         <Tab fx:id="tabReview" text="Review">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fitHeight="303.0" fitWidth="299.0" layoutX="31.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -266,11 +269,11 @@
                                     <TextArea fx:id="tfReview" layoutX="377.0" layoutY="130.0" prefHeight="200.0" prefWidth="846.0" />
                                  </children>
                               </AnchorPane>
-                          </content>
+                           </content>
                         </Tab>
                         <Tab fx:id="tabFuture" text="Future Destination">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <TextField editable="false" layoutX="107.0" prefHeight="138.0" prefWidth="1065.0" text="Our future travel destination....">
                                        <font>
@@ -284,9 +287,9 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                          </content>
+                           </content>
                         </Tab>
-                    </tabs>
+                     </tabs>
                   </TabPane>
                </children>
             </AnchorPane>
