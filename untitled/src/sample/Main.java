@@ -14,9 +14,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
 
-        Parent root = FXMLLoader.load(getClass().getResource("ExampleLayoutAlex.fxml"));
+       Parent root = FXMLLoader.load(getClass().getResource("ExampleLayoutAlexOrigin.fxml"));
+   //     Parent root = FXMLLoader.load(getClass().getResource("Layout2.fxml"));
         primaryStage.setTitle("Hello Agent");
-        primaryStage.setScene(new Scene(root, 1280, 700));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
         primaryStage.setResizable(true);
 

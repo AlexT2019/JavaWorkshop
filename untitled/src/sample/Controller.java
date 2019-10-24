@@ -3,11 +3,18 @@ package sample;
 
 import java.io.FileNotFoundException;
 import java.net.URL;
+
+/*
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javafx.application.Application;
+import data.dummy.BookingData;
+import javafx.scene.layout.StackPane;
+*/
+
 import java.util.ResourceBundle;
 
 import data.AgencyDB;
@@ -15,12 +22,12 @@ import data.AgentDB;
 
 import data.ProductDB;
 import data.SupplierDB;
-import javafx.application.Application;
+
 
 import data.BookingDB;
 import data.CustomerDB;
 import data.PackageDB;
-import data.dummy.BookingData;
+
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -36,13 +43,11 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+
 import model.Agency;
 import model.Agent;
 import model.Product;
 import model.Supplier;
-
-
 import model.Booking;
 import model.Customer;
 import model.Package;
@@ -56,7 +61,6 @@ public class Controller {
     private ObservableList<Product> products = FXCollections.observableArrayList();
     private ObservableList<Supplier> suppliers = FXCollections.observableArrayList();
 
-private ObservableList<Agent> agents = FXCollections.observableArrayList();
     private ObservableList<Customer> customers = FXCollections.observableArrayList();
     private ObservableList<Booking> bookings = FXCollections.observableArrayList();
 
@@ -203,11 +207,11 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     @FXML // fx:id="btnClearReview"
     private Button btnClearReview; // Value injected by FXMLLoader
 
-    /*
+
     @FXML
     private TableView tblBookings;
 
-    @FXML
+    /*@FXML
     private TableColumn<?, ?> colAgentId1;
 
     @FXML
@@ -251,12 +255,8 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     private TableColumn<?, ?> colAgncyFax1;
 
 */
-    @FXML
-    private AnchorPane apControls1;
 
 
-    @FXML
-    private AnchorPane anpEmp1;
 
 
     @FXML
@@ -313,8 +313,7 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
 
     @FXML
     private Button btnCancelCustomer;
-    @FXML
-    private AnchorPane anpEmp11;
+
 
     @FXML
     private Label lbl311;
@@ -332,20 +331,19 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
     private TableColumn<?, ?> colAgencyId1;
 
     @FXML
-    private TextField tfCustId, tfCustFirstName, tfCustMiddleInitial, tfCustLastName, tfCustPhone, tfCustEmail, tfCustNotes, tf6,tf7, tf8,
-            tf13, tf23,  tf33,  tf43, tf53,  tf63, tf73, tf83, tf93, tfPkgBasePrice, tfAgencyCommission, tfPkgName, tfUserName, tfAgentId, tfAgtFirstName,
-            tfAgtMiddleInitial, tfAgtLastName, tfAgtBusPhone, tfAgtEmail, tfAgtPosition, tfAgencyId;
+    private TextField tfCustId, tfCustMiddleInitial,  tfCustPhone, tfCustNotes, tf6,tf7, tf8,
+            tf13, tf23,  tf33,  tf43, tf53,  tf63, tf73, tf83, tf93, tfPkgBasePrice, tfAgencyCommission, tfPkgName, tfUserName;
 
 
 
     @FXML
-    private Label lblID1,  lbl11, lbl21,lbl31, lbl41,lbl71,  lbl51, lbl311, lblID11, lbl211, lbl711, lblID,  lbl1, lbl2, lbl3, lbl4, lbl7,
+    private Label lblID1,  lbl11, lbl21,lbl31, lbl41,lbl71,  lbl51,  lblID11, lbl211, lbl711, lblID,  lbl1, lbl2, lbl3, lbl4, lbl7,
             lbl5, lbl64, lblID3,  lbl13, lbl23, lbl33, lbl43, lbl73, lbl53,  lbl6, lbl63, lbl83, lbl93;
 
 
     @FXML
-    private Button btnUpdatePackage,btnAddPackage, btnClearPackageTF, btnApplyPackageChanges,
-            btnDeletePkg, btnExit, btnInsertCustomer,  btnSaveCustomer, btnUpdateCustomer, btnUpdate,
+    private Button btnApplyPackageChanges,
+            btnDeletePkg, btnExit, btnInsertCustomer,  btnSaveCustomer,  btnUpdate,
             btnClearAgent, btnDeleteAgent, btnInsertAgent, btnInsert3,  btnClear3, btnApply3, btnLogin, btnLogOut;
 
     @FXML // fx:id="pane"
@@ -476,7 +474,23 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         ClearAgentInputData();
         refreshAgentTableView();
 
-    @FXML
+
+        Agent _selectedAgent;
+        int _selectedAgentIndex;
+
+
+
+        Alert a = new Alert(Alert.AlertType.INFORMATION,"you are fired!!");
+        a.show();
+
+        imgFired.toFront();
+
+
+
+
+
+}
+        @FXML
     void OnMouseClickedCusttable(MouseEvent event) {
         //look for the booking list of selected customer
         //and build a new list in the booking list
@@ -563,22 +577,6 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
 
 
 
-
-    Agent _selectedAgent;
-    int _selectedAgentIndex;
-
-
-
-        Alert a = new Alert(Alert.AlertType.INFORMATION,"you are fired!!");
-        a.show();
-
-        imgFired.toFront();
-
-
-
-
-    }
-
     @FXML
     void onInsertAgentBtnClick(MouseEvent event) {
 
@@ -604,6 +602,7 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
         tfReview.setText("Yeh. Lets re-write this review and send us a better mark! ");
     }
 
+    @FXML
     void OnActionBtnAddCust(ActionEvent event) {
 
         //get the value for the new customer after validating all fields
@@ -714,146 +713,132 @@ private ObservableList<Agent> agents = FXCollections.observableArrayList();
 
     @FXML
     void initialize() {
-        assert apCredentials != null : "fx:id=\"apCredentials\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfUserPass != null : "fx:id=\"tfUserPass\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfUserName != null : "fx:id=\"tfUserName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnLogOut != null : "fx:id=\"btnLogOut\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tabAgents != null : "fx:id=\"tabAgents\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert anpEmp != null : "fx:id=\"anpEmp\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tblAgents != null : "fx:id=\"tblAgents\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-          assert tblAgencies != null : "fx:id=\"tblAgencies\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert apControls != null : "fx:id=\"apControls\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfAgentId != null : "fx:id=\"tfAgentId\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfAgtFirstName != null : "fx:id=\"tfAgtFirstName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfAgtMiddleInitial != null : "fx:id=\"tfAgtMiddleInitial\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfAgtLastName != null : "fx:id=\"tfAgtLastName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfAgtBusPhone != null : "fx:id=\"tfAgtBusPhone\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lblID != null : "fx:id=\"lblID\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl1 != null : "fx:id=\"lbl1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl2 != null : "fx:id=\"lbl2\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl3 != null : "fx:id=\"lbl3\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl4 != null : "fx:id=\"lbl4\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl7 != null : "fx:id=\"lbl7\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl5 != null : "fx:id=\"lbl5\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl64 != null : "fx:id=\"lbl64\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfAgtEmail != null : "fx:id=\"tfAgtEmail\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfAgtPosition != null : "fx:id=\"tfAgtPosition\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfAgencyId != null : "fx:id=\"tfAgencyId\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnUpdate != null : "fx:id=\"btnUpdate\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnInsertAgent != null : "fx:id=\"btnInsertAgent\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnClearAgent != null : "fx:id=\"btnClearAgent\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnDeleteAgent != null : "fx:id=\"btnDeleteAgent\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tabCustomers != null : "fx:id=\"tabCustomers\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert anpEmp1 != null : "fx:id=\"anpEmp1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+        assert apCredentials != null : "fx:id=\"apCredentials\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfUserPass != null : "fx:id=\"tfUserPass\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfUserName != null : "fx:id=\"tfUserName\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnLogin != null : "fx:id=\"btnLogin\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnLogOut != null : "fx:id=\"btnLogOut\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tabAgents != null : "fx:id=\"tabAgents\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert anpEmp != null : "fx:id=\"anpEmp\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tblAgents != null : "fx:id=\"tblAgents\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+          assert tblAgencies != null : "fx:id=\"tblAgencies\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert apControls != null : "fx:id=\"apControls\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfAgentId != null : "fx:id=\"tfAgentId\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfAgtFirstName != null : "fx:id=\"tfAgtFirstName\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfAgtMiddleInitial != null : "fx:id=\"tfAgtMiddleInitial\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfAgtLastName != null : "fx:id=\"tfAgtLastName\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfAgtBusPhone != null : "fx:id=\"tfAgtBusPhone\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lblID != null : "fx:id=\"lblID\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl1 != null : "fx:id=\"lbl1\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl2 != null : "fx:id=\"lbl2\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl3 != null : "fx:id=\"lbl3\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl4 != null : "fx:id=\"lbl4\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl7 != null : "fx:id=\"lbl7\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl5 != null : "fx:id=\"lbl5\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl64 != null : "fx:id=\"lbl64\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfAgtEmail != null : "fx:id=\"tfAgtEmail\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfAgtPosition != null : "fx:id=\"tfAgtPosition\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfAgencyId != null : "fx:id=\"tfAgencyId\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnUpdate != null : "fx:id=\"btnUpdate\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnInsertAgent != null : "fx:id=\"btnInsertAgent\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnClearAgent != null : "fx:id=\"btnClearAgent\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnDeleteAgent != null : "fx:id=\"btnDeleteAgent\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tabCustomers != null : "fx:id=\"tabCustomers\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert anpEmp1 != null : "fx:id=\"anpEmp1\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
 
-        assert tblBookings != null : "fx:id=\"tblBookings\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgentId1 != null : "fx:id=\"colAgentId1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgtFirstName1 != null : "fx:id=\"colAgtFirstName1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgtMiddleInitial1 != null : "fx:id=\"colAgtMiddleInitial1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgtLastName1 != null : "fx:id=\"colAgtLastName1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgtBusPhone1 != null : "fx:id=\"colAgtBusPhone1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgtEmail1 != null : "fx:id=\"colAgtEmail1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgtPosition1 != null : "fx:id=\"colAgtPosition1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert imageViewAgentPhoto1 != null : "fx:id=\"imageViewAgentPhoto1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tblAgencies1 != null : "fx:id=\"tblAgencies1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgencyId1 != null : "fx:id=\"colAgencyId1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgncyAddress1 != null : "fx:id=\"colAgncyAddress1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgncyCity1 != null : "fx:id=\"colAgncyCity1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgncyProv1 != null : "fx:id=\"colAgncyProv1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgncyPostal1 != null : "fx:id=\"colAgncyPostal1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgncyCountry1 != null : "fx:id=\"colAgncyCountry1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgncyPhone1 != null : "fx:id=\"colAgncyPhone1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colAgncyFax1 != null : "fx:id=\"colAgncyFax1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert apControls1 != null : "fx:id=\"apControls1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+        assert tblBookings != null : "fx:id=\"tblBookings\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
 
-        assert tfCustFirstName != null : "fx:id=\"tfCustFirstName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+        assert colAgencyId1 != null : "fx:id=\"colAgencyId1\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
 
-        assert tfCustLastName != null : "fx:id=\"tfCustLastName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+        assert apControls1 != null : "fx:id=\"apControls1\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
 
-        assert tfCustEmail != null : "fx:id=\"tfCustEmail\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+        assert tfCustFirstName != null : "fx:id=\"tfCustFirstName\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
 
-        assert btnUpdateCustomer != null : "fx:id=\"btnUpdateCustomer\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+        assert tfCustLastName != null : "fx:id=\"tfCustLastName\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
 
-        assert tabPackages != null : "fx:id=\"tabPackages\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert anpEmp11 != null : "fx:id=\"anpEmp11\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl311 != null : "fx:id=\"lbl311\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnUpdatePackage != null : "fx:id=\"btnUpdatePackage\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnAddPackage != null : "fx:id=\"btnAddPackage\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnClearPackageTF != null : "fx:id=\"btnClearPackageTF\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnApplyPackageChanges != null : "fx:id=\"btnApplyPackageChanges\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnDeletePkg != null : "fx:id=\"btnDeletePkg\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lblID11 != null : "fx:id=\"lblID11\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl211 != null : "fx:id=\"lbl211\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl711 != null : "fx:id=\"lbl711\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfPkgBasePrice != null : "fx:id=\"tfPkgBasePrice\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfAgencyCommission != null : "fx:id=\"tfAgencyCommission\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert dateStartDate != null : "fx:id=\"dateStartDate\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert dateEndDate != null : "fx:id=\"dateEndDate\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert cbPackageId != null : "fx:id=\"cbPackageId\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfPkgName != null : "fx:id=\"tfPkgName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert taPkgDesc != null : "fx:id=\"taPkgDesc\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tblPackages != null : "fx:id=\"tblPackages\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colPackageId != null : "fx:id=\"colPackageId\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colPkgName != null : "fx:id=\"colPkgName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colPkgStartDate != null : "fx:id=\"colPkgStartDate\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colPkgEndDate != null : "fx:id=\"colPkgEndDate\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colPkgDescription != null : "fx:id=\"colPkgDescription\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colPkgBasePrice != null : "fx:id=\"colPkgBasePrice\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert colPkgAgencyComm != null : "fx:id=\"colPkgAgencyComm\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tabEmployees != null : "fx:id=\"tabEmployees\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert anpEmp3 != null : "fx:id=\"anpEmp3\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert apControls3 != null : "fx:id=\"apControls3\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tf13 != null : "fx:id=\"tf13\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tf23 != null : "fx:id=\"tf23\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tf33 != null : "fx:id=\"tf33\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tf43 != null : "fx:id=\"tf43\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tf53 != null : "fx:id=\"tf53\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnUpdate3 != null : "fx:id=\"btnUpdate3\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnInsert3 != null : "fx:id=\"btnInsert3\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnClear3 != null : "fx:id=\"btnClear3\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert datepicker13 != null : "fx:id=\"datepicker13\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lblID3 != null : "fx:id=\"lblID3\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnApply3 != null : "fx:id=\"btnApply3\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl13 != null : "fx:id=\"lbl13\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl23 != null : "fx:id=\"lbl23\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl33 != null : "fx:id=\"lbl33\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl43 != null : "fx:id=\"lbl43\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl73 != null : "fx:id=\"lbl73\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl53 != null : "fx:id=\"lbl53\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl6 != null : "fx:id=\"lbl6\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl63 != null : "fx:id=\"lbl63\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl83 != null : "fx:id=\"lbl83\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tf63 != null : "fx:id=\"tf63\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tf73 != null : "fx:id=\"tf73\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tf83 != null : "fx:id=\"tf83\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tf93 != null : "fx:id=\"tf93\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert lbl93 != null : "fx:id=\"lbl93\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert datepicker23 != null : "fx:id=\"datepicker23\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tabReview != null : "fx:id=\"tabReview\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tabFuture != null : "fx:id=\"tabFuture\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tabSandP != null : "fx:id=\"tabSandP\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert anpEmp2 != null : "fx:id=\"anpEmp2\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tblSuppliers != null : "fx:id=\"tblSuppliers\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tblProducts != null : "fx:id=\"tblProducts\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnAddProd != null : "fx:id=\"btnAddProd\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnUpdateProd != null : "fx:id=\"btnUpdateProd\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnClearProd != null : "fx:id=\"btnClearProd\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfProdId != null : "fx:id=\"tfProdId\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfProdName != null : "fx:id=\"tfProdName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfProdId1 != null : "fx:id=\"tfProdId1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfProdName1 != null : "fx:id=\"tfProdName1\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnAddSupplier != null : "fx:id=\"btnAddSupplier\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnUpdateSupplier != null : "fx:id=\"btnUpdateSupplier\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnClearSupplier != null : "fx:id=\"btnClearSupplier\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnExit != null : "fx:id=\"btnExit\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfSupplierId != null : "fx:id=\"tfSupplierId\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfSupplierName != null : "fx:id=\"tfSupplierName\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert imgFired != null : "fx:id=\"imgFired\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert pane != null : "fx:id=\"pane\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfReview != null : "fx:id=\"tfReview\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert btnClearReview != null : "fx:id=\"btnClearReview\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
-        assert tfReview != null : "fx:id=\"tfReview\" was not injected: check your FXML file 'ExampleLayoutAlex.fxml'.";
+        assert tfCustEmail != null : "fx:id=\"tfCustEmail\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+
+        assert btnUpdateCustomer != null : "fx:id=\"btnUpdateCustomer\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+
+        assert tabPackages != null : "fx:id=\"tabPackages\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert anpEmp11 != null : "fx:id=\"anpEmp11\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl311 != null : "fx:id=\"lbl311\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnUpdatePackage != null : "fx:id=\"btnUpdatePackage\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnAddPackage != null : "fx:id=\"btnAddPackage\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnClearPackageTF != null : "fx:id=\"btnClearPackageTF\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnApplyPackageChanges != null : "fx:id=\"btnApplyPackageChanges\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnDeletePkg != null : "fx:id=\"btnDeletePkg\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lblID11 != null : "fx:id=\"lblID11\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl211 != null : "fx:id=\"lbl211\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl711 != null : "fx:id=\"lbl711\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfPkgBasePrice != null : "fx:id=\"tfPkgBasePrice\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfAgencyCommission != null : "fx:id=\"tfAgencyCommission\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert dateStartDate != null : "fx:id=\"dateStartDate\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert dateEndDate != null : "fx:id=\"dateEndDate\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert cbPackageId != null : "fx:id=\"cbPackageId\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfPkgName != null : "fx:id=\"tfPkgName\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert taPkgDesc != null : "fx:id=\"taPkgDesc\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tblPackages != null : "fx:id=\"tblPackages\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert colPackageId != null : "fx:id=\"colPackageId\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert colPkgName != null : "fx:id=\"colPkgName\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert colPkgStartDate != null : "fx:id=\"colPkgStartDate\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert colPkgEndDate != null : "fx:id=\"colPkgEndDate\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert colPkgDescription != null : "fx:id=\"colPkgDescription\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert colPkgBasePrice != null : "fx:id=\"colPkgBasePrice\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert colPkgAgencyComm != null : "fx:id=\"colPkgAgencyComm\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tabEmployees != null : "fx:id=\"tabEmployees\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert anpEmp3 != null : "fx:id=\"anpEmp3\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert apControls3 != null : "fx:id=\"apControls3\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tf13 != null : "fx:id=\"tf13\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tf23 != null : "fx:id=\"tf23\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tf33 != null : "fx:id=\"tf33\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tf43 != null : "fx:id=\"tf43\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tf53 != null : "fx:id=\"tf53\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnUpdate3 != null : "fx:id=\"btnUpdate3\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnInsert3 != null : "fx:id=\"btnInsert3\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnClear3 != null : "fx:id=\"btnClear3\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert datepicker13 != null : "fx:id=\"datepicker13\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lblID3 != null : "fx:id=\"lblID3\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnApply3 != null : "fx:id=\"btnApply3\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl13 != null : "fx:id=\"lbl13\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl23 != null : "fx:id=\"lbl23\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl33 != null : "fx:id=\"lbl33\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl43 != null : "fx:id=\"lbl43\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl73 != null : "fx:id=\"lbl73\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl53 != null : "fx:id=\"lbl53\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl6 != null : "fx:id=\"lbl6\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl63 != null : "fx:id=\"lbl63\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl83 != null : "fx:id=\"lbl83\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tf63 != null : "fx:id=\"tf63\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tf73 != null : "fx:id=\"tf73\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tf83 != null : "fx:id=\"tf83\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tf93 != null : "fx:id=\"tf93\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert lbl93 != null : "fx:id=\"lbl93\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert datepicker23 != null : "fx:id=\"datepicker23\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tabReview != null : "fx:id=\"tabReview\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tabFuture != null : "fx:id=\"tabFuture\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tabSandP != null : "fx:id=\"tabSandP\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert anpEmp2 != null : "fx:id=\"anpEmp2\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tblSuppliers != null : "fx:id=\"tblSuppliers\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tblProducts != null : "fx:id=\"tblProducts\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnAddProd != null : "fx:id=\"btnAddProd\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnUpdateProd != null : "fx:id=\"btnUpdateProd\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnClearProd != null : "fx:id=\"btnClearProd\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfProdId != null : "fx:id=\"tfProdId\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfProdName != null : "fx:id=\"tfProdName\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfProdId1 != null : "fx:id=\"tfProdId1\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfProdName1 != null : "fx:id=\"tfProdName1\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnAddSupplier != null : "fx:id=\"btnAddSupplier\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnUpdateSupplier != null : "fx:id=\"btnUpdateSupplier\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnClearSupplier != null : "fx:id=\"btnClearSupplier\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnExit != null : "fx:id=\"btnExit\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfSupplierId != null : "fx:id=\"tfSupplierId\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfSupplierName != null : "fx:id=\"tfSupplierName\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert imgFired != null : "fx:id=\"imgFired\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert pane != null : "fx:id=\"pane\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfReview != null : "fx:id=\"tfReview\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert btnClearReview != null : "fx:id=\"btnClearReview\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
+        assert tfReview != null : "fx:id=\"tfReview\" was not injected: check your FXML file 'ExampleLayoutAlexo_mergedversion.fxml'.";
 
         loadAgents();
         LoadAgencies();

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -35,13 +36,13 @@
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="797.0" prefWidth="1272.0" GridPane.columnIndex="1">
          <children>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <TabPane prefHeight="724.0" prefWidth="1259.0" tabClosingPolicy="UNAVAILABLE">
-                     <tabs>
-                        <Tab text="Start">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="442.0" prefWidth="1259.0">
+                    <tabs>
+                      <Tab text="Start">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="442.0" prefWidth="1259.0">
                                  <children>
                                     <ImageView fitHeight="381.0" fitWidth="567.0" layoutX="279.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -60,8 +61,8 @@
                                     </AnchorPane>
                                  </children>
                               </AnchorPane>
-                           </content>
-                        </Tab>
+                        </content>
+                      </Tab>
                         <Tab fx:id="tabAgents" text="Agents">
                            <content>
 
@@ -118,19 +119,11 @@
                         </Tab>
                         <Tab fx:id="tabCustomers" text="Customers">
                            <content>
-                              <AnchorPane fx:id="anpEmp1" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="1259.0" />
-                           </content>
-                        </Tab>
-                        <Tab fx:id="tabSandP" text="Suppliers And Products">
-                           <content>
-                              <AnchorPane fx:id="anpEmp2" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="1259.0">
+                              <AnchorPane fx:id="anpEmp1" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="1259.0">
                                  <children>
-                                    <TableView fx:id="tblSuppliers" layoutX="630.0" layoutY="80.0" prefHeight="339.0" prefWidth="602.0" />
-                                    <Label layoutX="630.0" layoutY="41.0" text="All those who supply us with all our goodies">
-
-                                    <TableView fx:id="tblCustomers" layoutX="334.0" layoutY="58.0" onMouseClicked="#OnMouseClickedCusttable" prefHeight="200.0" prefWidth="904.0" />
-                                    <TableView fx:id="tblBookings" layoutX="334.0" layoutY="326.0" onMouseClicked="#OnMouseClickedBooktable" prefHeight="214.0" prefWidth="901.0" />
-                                    <VBox layoutX="5.0" layoutY="15.0" prefHeight="383.0" prefWidth="103.0">
+                                    <TableView fx:id="tblCustomers" layoutX="371.0" layoutY="41.0" onMouseClicked="#OnMouseClickedCusttable" prefHeight="227.0" prefWidth="533.0" />
+                                    <TableView fx:id="tblBookings" layoutX="370.0" layoutY="355.0" onMouseClicked="#OnMouseClickedBooktable" prefHeight="237.0" prefWidth="538.0" />
+                                    <VBox layoutX="5.0" layoutY="31.0" prefHeight="360.0" prefWidth="98.0">
                                        <children>
                                           <Label prefHeight="20.0" prefWidth="84.0" text="Customer Id:">
                                              <VBox.margin>
@@ -204,7 +197,7 @@
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <VBox layoutX="109.0" layoutY="32.0" prefHeight="342.0" prefWidth="218.0">
+                                    <VBox layoutX="115.0" layoutY="33.0" prefHeight="366.0" prefWidth="211.0">
                                        <children>
                                           <TextField fx:id="tfCustomerId" />
                                           <TextField fx:id="tfCustFirstName">
@@ -263,14 +256,14 @@
                                                 <Insets top="2.0" />
                                              </VBox.margin>
                                           </TextField>
-                                          <TextField fx:id="tfCustPassword">
+                                          <TextField fx:id="tfCustPassword" prefHeight="15.0" prefWidth="214.0">
                                              <VBox.margin>
                                                 <Insets top="2.0" />
                                              </VBox.margin>
                                           </TextField>
                                        </children>
                                     </VBox>
-                                    <HBox layoutX="17.0" layoutY="414.0" prefHeight="35.0" prefWidth="271.0">
+                                    <HBox layoutX="14.0" layoutY="470.0" prefHeight="0.0" prefWidth="274.0">
                                        <children>
                                           <Button fx:id="btnEditCustomer" mnemonicParsing="false" onAction="#OnActionClickBtnEditCust" text="Edit" />
                                           <Button fx:id="btnAddCustomer" mnemonicParsing="false" onAction="#OnActionBtnAddCust" text="Add" />
@@ -278,18 +271,34 @@
                                           <Button fx:id="btnCancelCustomer" mnemonicParsing="false" onAction="#OnActionBtnCancelCust" text="Cancel" />
                                        </children>
                                     </HBox>
-                                    <Label layoutX="334.0" layoutY="33.0" prefHeight="17.0" prefWidth="78.0" text="Customers">
+                                    <Label layoutX="367.0" layoutY="14.0" prefHeight="17.0" prefWidth="78.0" text="Customers">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="367.0" layoutY="317.0" prefHeight="0.0" prefWidth="78.0" text="Bookings">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="tabSandP" text="Suppliers And Products">
+                           <content>
+                              <AnchorPane fx:id="anpEmp2" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="1259.0">
+                                 <children>
+                                    <TableView fx:id="tblSuppliers" layoutX="630.0" layoutY="80.0" prefHeight="339.0" prefWidth="602.0" />
+                                    <Label layoutX="630.0" layoutY="41.0" text="All those who supply us with all our goodies">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
                                     <ImageView fx:id="imageViewAgentPhoto1" fitHeight="204.0" fitWidth="200.0" layoutX="466.0" layoutY="454.0" pickOnBounds="true" preserveRatio="true" />
                                     <TableView fx:id="tblProducts" layoutX="27.0" layoutY="79.0" prefHeight="341.0" prefWidth="564.0" />
                                     <Label layoutX="27.0" layoutY="41.0" text="Products">
-
-                                    <Label layoutX="334.0" layoutY="297.0" prefHeight="17.0" prefWidth="78.0" text="Bookings">
                                        <font>
-                                          <Font name="System Bold" size="14.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
                                     <AnchorPane layoutX="28.0" layoutY="443.0" prefHeight="200.0" prefWidth="1212.0">
@@ -322,12 +331,51 @@
                                        <children>
                                           <Label fx:id="lbl311" layoutX="676.0" layoutY="-42.0" />
                                           <GridPane layoutX="428.0" layoutY="28.0" prefHeight="126.0" prefWidth="556.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="83.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="400.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane layoutX="69.0" layoutY="386.0" prefHeight="264.0" prefWidth="987.0">
+                                       <children>
+                                          <Label fx:id="lbl3111" layoutX="676.0" layoutY="-42.0" />
                                           <Button fx:id="btnUpdatePackage" layoutX="14.0" layoutY="79.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="117.0" text="Update Package" wrapText="true" />
                                           <Button fx:id="btnAddPackage" layoutX="15.0" layoutY="35.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Add Package" />
                                           <Button fx:id="btnClearPackage" layoutX="274.0" layoutY="154.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="131.0" text="Clear" />
                                           <Button fx:id="btnApplyPackageChanges" layoutX="872.0" layoutY="165.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="101.0" text="Apply" />
                                           <Button fx:id="btnDeletePkg" layoutX="14.0" layoutY="118.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="117.0" text="Delete Package" wrapText="true" />
                                           <GridPane layoutX="144.0" layoutY="28.0" prefHeight="115.0" prefWidth="261.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Label fx:id="lblID11" text="PkgId:" />
+                                                <Label fx:id="lbl211" text="Base Price (CAD):" GridPane.rowIndex="3" />
+                                                <Label fx:id="lbl711" text="Commission" GridPane.rowIndex="4" />
+                                                <TextField fx:id="tfPkgBasePrice" prefHeight="25.0" prefWidth="79.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <TextField fx:id="tfAgencyCommission" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <Label text="Start Date" GridPane.rowIndex="1" />
+                                                <DatePicker fx:id="dateStartDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="End Date" GridPane.rowIndex="2" />
+                                                <DatePicker fx:id="dateEndDate" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <ComboBox fx:id="cbPackageId" prefWidth="150.0" GridPane.columnIndex="1" />
+                                             </children>
+                                          </GridPane>
+                                          <GridPane layoutX="428.0" layoutY="28.0" prefHeight="126.0" prefWidth="556.0">
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="83.0" />
                                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="400.0" minWidth="10.0" prefWidth="400.0" />
@@ -336,25 +384,31 @@
                                                 <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
                                                 <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
+                                             <children>
+                                                <Label text="Package Name:" />
+                                                <Label text="Description:" GridPane.rowIndex="1" />
+                                                <TextField fx:id="tfPkgName" prefHeight="25.0" prefWidth="398.0" GridPane.columnIndex="1" />
+                                                <TextArea fx:id="taPkgDesc" prefHeight="95.0" prefWidth="393.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                             </children>
                                           </GridPane>
                                        </children>
                                     </AnchorPane>
-                                    <TableView fx:id="tblPackages" layoutX="19.0" layoutY="41.0" prefHeight="339.0" prefWidth="989.0">
-                                       <columns>
-                                          <TableColumn fx:id="colPackageId" editable="false" prefWidth="40.0" text="PkgID" />
-                                          <TableColumn fx:id="colPkgName" prefWidth="178.0" text="Package Name" />
-                                          <TableColumn fx:id="colPkgStartDate" minWidth="0.0" prefWidth="89.0" text="Start Date" />
-                                          <TableColumn fx:id="colPkgEndDate" prefWidth="99.0" text="End Date" />
-                                          <TableColumn fx:id="colPkgDescription" prefWidth="420.0" text="Description" />
-                                          <TableColumn fx:id="colPkgBasePrice" prefWidth="65.0" text="Base Price" />
-                                          <TableColumn fx:id="colPkgAgencyComm" editable="false" prefWidth="82.0" text="Commission" />
-                                       </columns>
-                                    </TableView>
-                                    <Label layoutX="19.0" layoutY="14.0" text="Packages">
+                                    <Label layoutX="42.0" layoutY="38.0" text="Packages">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
+                                    <TableView layoutX="69.0" layoutY="79.0" prefHeight="303.0" prefWidth="986.0">
+                                      <columns>
+                                        <TableColumn fx:id="colPackageId" prefWidth="75.0" text="PkgID" />
+                                        <TableColumn fx:id="colPkgName" prefWidth="273.0" text="Package Name" />
+                                          <TableColumn fx:id="colPkgStartDate" minWidth="0.0" prefWidth="181.0" text="Start Date" />
+                                          <TableColumn fx:id="colPkgEndDate" prefWidth="76.0" text="End Date" />
+                                          <TableColumn fx:id="colPkgDescription" prefWidth="224.0" text="Description" />
+                                          <TableColumn fx:id="colPkgBasePrice" prefWidth="75.0" text="Base Price" />
+                                          <TableColumn fx:id="colPkgAgencyComm" prefWidth="81.0" text="Commission" />
+                                      </columns>
+                                    </TableView>
                                  </children>
                               </AnchorPane>
                            </content>
@@ -430,8 +484,8 @@
                            </content>
                         </Tab>
                         <Tab fx:id="tabReview" text="Review">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fitHeight="303.0" fitWidth="299.0" layoutX="31.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -448,11 +502,11 @@
                                     <TextArea fx:id="tfReview" layoutX="377.0" layoutY="130.0" prefHeight="200.0" prefWidth="846.0" />
                                  </children>
                               </AnchorPane>
-                           </content>
+                          </content>
                         </Tab>
                         <Tab fx:id="tabFuture" text="Future Destination">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <TextField editable="false" layoutX="107.0" prefHeight="138.0" prefWidth="1065.0" text="Our future travel destination....">
                                        <font>
@@ -466,9 +520,9 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                           </content>
+                          </content>
                         </Tab>
-                     </tabs>
+                    </tabs>
                   </TabPane>
                </children>
             </AnchorPane>
