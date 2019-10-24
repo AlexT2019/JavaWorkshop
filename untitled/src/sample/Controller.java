@@ -1199,7 +1199,6 @@ public class Controller {
         tabAgents.setDisable(true);
         tabSandP.setDisable(true);
         tabCustomers.setDisable(true);
-        tabEmployees.setDisable(true);
         tabFuture.setDisable(true);
         tabPackages.setDisable(true);
         tabReview.setDisable(true);
@@ -1216,7 +1215,7 @@ public class Controller {
         tabAgents.setDisable(false);
         tabSandP.setDisable(false);
         tabCustomers.setDisable(false);
-        tabEmployees.setDisable(false);
+
         tabFuture.setDisable(false);
         tabPackages.setDisable(false);
         tabReview.setDisable(false);
@@ -1228,7 +1227,7 @@ public class Controller {
         tabAgents.setDisable(true);
         tabSandP.setDisable(true);
         tabCustomers.setDisable(true);
-        tabEmployees.setDisable(true);
+
         tabFuture.setDisable(true);
         tabPackages.setDisable(true);
         tabReview.setDisable(true);
